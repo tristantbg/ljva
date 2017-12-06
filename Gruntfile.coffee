@@ -117,6 +117,13 @@ module.exports = (grunt) ->
           src: '**/*'
           dest: '<%= path.public %>/assets/fonts'
         ]
+      templates:
+        files: [
+          expand: true
+          cwd: '<%= path.dev %>/templates'
+          src: '**/*'
+          dest: '<%= path.craft %>/templates'
+        ]
 
     # HTMLmin - Minify HTML files
     # ------------------------------------------------------------------------ #
@@ -197,7 +204,8 @@ module.exports = (grunt) ->
       # Templates
       templates:
         files: ['<%= path.dev %>/templates/**/*']
-        tasks: ['htmlmin:templates']
+        # tasks: ['htmlmin:templates']
+        tasks: ['copy:templates']
 
       # Scripts
       scripts:
@@ -238,6 +246,10 @@ module.exports = (grunt) ->
       img_svg:
         files: ['<%= path.dev %>/assets/img/**/*.svg']
         tasks: ['newer:copy:svg']
+      # Fonts
+      fonts:
+        files: ['<%= path.dev %>/assets/fonts/**/*.*']
+        tasks: ['newer:copy:fonts']
 
   # -------------------------------------------------------------------------- #
   # Load all Grunt tasks
@@ -253,7 +265,8 @@ module.exports = (grunt) ->
     'clean'
 
     # Minimize templates and copy to Craft folder
-    'htmlmin:templates'
+    # 'htmlmin:templates'
+    'copy:templates'
 
     # Generate images
     'copy:gif'
@@ -261,10 +274,13 @@ module.exports = (grunt) ->
     'copy:png'
     'copy:svg'
 
+    # Generate Fonts
+    'copy:fonts'
+
     # Generate scripts
     'coffee'
-    'concat:bootstrap_js'
-    'concat:jquery'
+    # 'concat:bootstrap_js'
+    # 'concat:jquery'
     'uglify:scripts'
 
     # Generate styles

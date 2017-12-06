@@ -32,6 +32,11 @@ return array(
   // Site environment
   "env" => CRAFT_ENVIRONMENT,
 
+  'environmentVariables' => array(
+    'basePath' => './',
+    'baseUrl'  => '//localhost:8888/lajava/public/',
+	),
+
   // Template settings
   "tmpl"  => array(
     "css" => "/lajava/public/assets/css",

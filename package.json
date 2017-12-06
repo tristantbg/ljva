@@ -26,6 +26,7 @@
     "load-grunt-tasks": "~0.6.0"
   },
   "dependencies": {
+    "feedify": "https://github.com/sarahdayan/feedify",
     "grunt-contrib-stylus": "^1.2.0",
     "jeet": "^7.2.0",
     "rupture": "^0.7.1",

@@ -1,0 +1,10 @@
+{% set mainTitle = "Organisateurs" %}
+{% extends "_layouts/default.html" %}
+
+{% block content %}
+		<div id="artists" class="row">
+  {% for artist in craft.entries.section('organisateurs').order("title").find() %}
+			<h2><a href="{{ artist.url }}">{{ artist.title }}</a></h2>
+  {% endfor %}
+		</div>
+{% endblock %}

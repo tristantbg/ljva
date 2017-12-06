@@ -1,6 +1,11 @@
-// webfont('F', 'F', false, 'normal')
+webfont('F', 'F', false, 'normal')
 
 global-reset()
+
+:root
+	--main-bg-color $main-bg-color
+	--main-title-color $main-title-color
+	--main-text-color $main-text-color
 
 *
 	//hideselect()
@@ -12,20 +17,22 @@ global-reset()
 body,html
 	width 100%
 	-webkit-text-size-adjust 100%
-	background $primary
+	background-color $main-bg-color
+	background-color var(--main-bg-color)
 
 html
-	font-size 62.5%
+	font-size 10px
 	+below($md)
 		font-size 1.8vmin
 
 body
-	font-family 'AG', Helvetica Neue, Arial, sans-serif
-	font-size ($heading/2)
-	line-height 1
-	color $secondary
+	font-family 'F', Helvetica Neue, Arial, sans-serif
 	text-rendering optimizeLegibility
 	font-smoothing()
+	font-size $font-size
+	line-height 1
+	color $main-text-color
+	color var(--main-text-color)
 
 p
 	margin-bottom 1em
@@ -34,40 +41,29 @@ p
 p:last-child
 	margin-bottom 0
 
-em
-	font-family 'AGI'
 
-h1, .title, .section-title
-	font-family 'F'
+h1, h2, .title, .section-title
+	text-transform uppercase
 	font-size $heading
+	line-height 0.93
+	letter-spacing -.03em
 
-h2, h4, .caption, .lead, strong, #menu, .code, .project-link
-	font-family 'F'
-	em
-		font-family 'FI'
+h2
+	color $main-title-color
+	color var(--main-title-color)
 
-small, .people-text, .project-infos, .project-content
-	font-size 1.7rem
-	+below($md)
-		font-size 1.8rem
+.lead
+	text-transform uppercase
 
-h4, .caption
-	font-size 1.3rem
-	+below($md)
-		font-size 1.8rem
+.small
+	text-transform uppercase
+	font-size $font-small
 
-.people-text
-	strong
-		font-size ($heading/2)
-
-.project-link::before
-	content '\2192'
-
-::selection
-	background alpha($secondary, 0.2)
+// ::selection
+// 	background alpha($main-text-color, 0.2)
 	
-::-moz-selection
-	background alpha($secondary, 0.2)
+// ::-moz-selection
+// 	background alpha($main-text-color, 0.2)
 
 video::-webkit-media-controls
 	display none
@@ -82,10 +78,6 @@ video::-webkit-media-controls-timeline {}
 
 video::-webkit-media-controls-current-time-display {}
 
-.embed__thumb>img
-	opacity 1
-	transition none
-
 a, a:hover, a:visited, a:focus
 	color inherit
 	text-decoration none
@@ -98,23 +90,25 @@ a, a:hover, a:visited, a:focus
 .lazy.lazyloaded, .lazy.flickity-lazyloaded, .plyr.plyr--ready
 	opacity 1
 
+.row
+	span(1)
+
 #main
 	span(1)
 
 #container
 	span(1)
-	transition transform $containerTransition $kinetic
-
-#main::before
-	+below($md)
-		content ''
-		position fixed
-		top 0
-		left 0
-		width 100%
-		height 8rem
-		background $primary
-		z-index 1
+	margin-top ($heading + $padding * 2)
+	padding $padding
+	width 'calc(100% - %s)' % $padding
+	background-color $main-title-color
+	background-color var(--main-title-color)
+	min-height 'calc(100vh - %s)' % ($heading + $padding * 2)
+	h1, h2
+		color $main-bg-color
+		color var(--main-bg-color)
+	& > .row
+		padding-left 12rem
 
 body.is-loading
 	#page-content

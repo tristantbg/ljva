@@ -1,1 +1,12 @@
-<header></header>
+<header>
+  {% if mainTitle is defined %}
+      {% if mainTitle == "Programmation" %}
+      <a href="{{ siteUrl }}programmation/">
+        <h2>{{mainTitle}}</h2>
+      </a>
+      {% else %}
+      <h2>{{mainTitle}}</h2>
+      {% endif %}
+  {% endif %}
+  <div id="site-title"><a href="{{siteUrl}}"><h1>{{siteName}}</h1></a></div>
+</header>

@@ -1,0 +1,87 @@
+.page-header
+	padding-right 7em
+	margin-bottom $padding
+	&.calendar
+		padding-right 0
+		display flex
+		justify-content space-between
+		#pagination
+			display flex
+			flex-direction column
+			text-align right
+			line-height 1.4
+			a:last-child
+				// margin-left 1.3em
+
+#event-pagination
+	margin 'calc(1em - %s) 0 1em' % $padding
+	a
+		span(1/2)
+		&:last-child
+			text-align right
+
+#events
+	margin-top 0.3em
+	display flex
+	justify-content stretch
+	flex-wrap wrap
+	.event-item
+		position relative
+		column(1/4)
+		flex 0 1 "calc(25% - %s)" % ($padding)
+		margin-right $padding
+		margin-bottom ($padding*2)
+		padding $padding
+		border-top 1px solid
+		border-left 1px solid
+		.event-day
+			position absolute
+			padding 0 0.5em
+			top -0.5em
+			left "calc(%s - 0.5em)" % $padding
+			background-color $main-title-color
+			background-color var(--main-title-color)
+		.link-overlay
+			position absolute
+			top 0
+			left 0
+			width 100%
+			height 100%
+		.event-infos
+			height 100%
+			display flex
+			flex-direction column
+			justify-content space-between
+		.event-infos--item:not(:last-child)
+			margin-bottom 1em
+		.event-header
+			display flex
+			.event-day-num
+				flex 0 0 ($font-size*3)
+		.event-image
+			height 20rem
+			padding 0 ($font-size*3)
+			flex-grow 1
+			img
+				object-fit contain
+				object-position center left
+		.event-subheader
+			display flex
+			.event-calendar
+				flex 0 0 ($font-size*3)
+				span
+					border 1px solid
+					padding 0.05em 0.2em 0.03em
+			.event-pratical
+				div
+					display inline
+				div:not(.event-pratical--price):not(:first-child)::before
+					content '\00a0|\00a0'
+				.event-pratical--style
+					span:not(:last-child)::after
+						content ', '
+				.event-pratical--price
+					display block
+		.event-artists
+			padding-left ($font-size*3)
+			min-height 3em

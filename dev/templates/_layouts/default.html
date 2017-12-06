@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>
-      {% if title %}{{ title }} | {% endif %}
+      {% if pageTitle is defined %}{{ pageTitle }} | {% endif %}
       {{ siteName }}
     </title>
 
@@ -36,7 +36,9 @@
     {% include "_partials/header.html" %}
 
     {# Page content #}
-    {% block page_content %}{% endblock %}
+    <div id="container">
+    {% block content %}{% endblock %}
+    </div>
 
     {% include "_partials/footer.html" %}
 

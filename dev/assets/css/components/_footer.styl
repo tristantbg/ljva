@@ -1,0 +1,26 @@
+#java-card
+	span(6/12)
+	height 25rem
+	position fixed
+	bottom 0
+	left 0
+	padding $padding
+	display flex
+	justify-content stretch
+	transition transform $containerTransition $kinetic
+	transform 'translateX(calc(-100% + 10rem + %s)) translateZ(0)' % ($padding*2)
+	background-color $main-bg-color
+	background-color var(--main-bg-color)
+	&:hover
+		transform none
+	#main-menu
+		flex 1 1 auto
+		padding-right $padding
+		.menu-item
+			column(1/2, $cycle:2)
+			text-transform uppercase
+	#infos-ticket
+		flex 0 0 10rem
+		display flex
+		flex-direction column
+		justify-content space-between

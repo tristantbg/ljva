@@ -303,6 +303,10 @@ faye-websocket@~0.4.3:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/faye-websocket/-/faye-websocket-0.4.4.tgz#c14c5b3bf14d7417ffbfd990c0a7495cd9f337bc"
 
+"feedify@https://github.com/sarahdayan/feedify":
+  version "0.0.0"
+  resolved "https://github.com/sarahdayan/feedify#e470134cef878a5876b6fbc19b3fbf79b91916ac"
+
 figures@^1.0.1:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/figures/-/figures-1.7.0.tgz#cbe1e3affcf1cd44b80cadfed28dc793a9701d2e"

@@ -1,0 +1,57 @@
+{% extends "_layouts/default.html" %}
+
+{# Acquire URL segments #}
+  {% set baseUrlSegments = 1 %}
+{% set segment1 = craft.request.segment(baseUrlSegments + 1) %}
+{% set segment2 = craft.request.segment(baseUrlSegments + 2) %}
+{% set segment3 = craft.request.segment(baseUrlSegments + 3) %}
+{% set segment4 = craft.request.segment(baseUrlSegments + 4) %}
+
+{% set targetStartDate = 'today' %}
+{% set targetEndDate = '+30 days' %}
+{% if segment2 and segment3 and segment4 %}
+    {% set targetStartDate = segment2 ~ '-' ~ segment3 ~ '-01' %}
+    {% set targetEndDate = segment2 ~ '-' ~ segment3 ~ '-' ~ segment4 %}
+{% endif %}
+
+{% set month = craft.calendar.month({date: targetStartDate, calendarId: 0}) %}
+
+{% set mainTitle = "Programmation" %}
+{% set pageTitle = month.date.format('F Y')|capitalize %}
+{% set page = "events" %}
+
+
+{% block content %}
+
+  <div class="page-header calendar">
+      <h2>{{ pageTitle }}</h2>
+      <div id="pagination" class="lead">
+        <a href="{{ siteUrl }}programmation/events/{{ month.previousDate.format('Y/m') }}/{{ month.previousDate.daysInMonth }}">
+            &larr; {{ month.previousDate.format('M') }}
+        </a>
+        <a href="{{ siteUrl }}programmation/events/{{ month.nextDate.format('Y/m') }}/{{ month.nextDate.daysInMonth }}">
+            {{ month.nextDate.format('M') }} &rarr;
+        </a>
+      </div>
+  </div>
+
+  <div class="row">
+
+            <div id="events" calendar-type="month">
+        {% set eventOptions = {
+        dateRangeStart: targetStartDate,
+        dateRangeEnd: targetEndDate
+        } %}
+
+            {% for event in craft.calendar.events(eventOptions) %}
+                {% include "programmation/layouts/_event.html" %}
+            {% else %}
+                <h3 class="title">Bientôt disponible</h3>
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+
+{% endblock %}
