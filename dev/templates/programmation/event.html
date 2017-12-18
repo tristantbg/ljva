@@ -1,8 +1,5 @@
 {% extends "_layouts/default.html" %}
 
-{% set pageTitle = "Event" %}
-{% set page = "event" %}
-
 {# Acquire URL segments #}
     {% set baseUrlSegments = 1 %}
     {% set segment1 = craft.request.segment(baseUrlSegments + 1) %}
@@ -25,7 +22,9 @@
 }) %}
                 
 
-{% set mainTitle = event.calendar.name %}
+{% set mainTitle = event.startDate.format('d M Y') %}
+{% set pageTitle = event.title %}
+{% set page = "event" %}
 
 {% block content %}
 

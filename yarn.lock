@@ -638,6 +638,20 @@ jeet@^7.2.0:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/jeet/-/jeet-7.2.0.tgz#2aa562a2dc1d74cc99527113f16a821e974e30ee"
 
+jquery.2@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/jquery.2/-/jquery.2-1.0.0.tgz#a8995f96fb804c335d08b90a57ec47db0faae6f8"
+  dependencies:
+    jquery "^2.0"
+
+jquery@>=1.8:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
+
+jquery@^2.0:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-2.2.4.tgz#2c89d6889b5eac522a7eea32c14521559c6cbf02"
+
 js-yaml@~2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-2.0.5.tgz#a25ae6509999e97df278c6719da11bd0687743a8"
@@ -1003,6 +1017,12 @@ sigmund@~1.0.0:
 signal-exit@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+
+smoothstate@^0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/smoothstate/-/smoothstate-0.7.2.tgz#0d03e88cdec783dc5e97a209e24ed799f5fb1be7"
+  dependencies:
+    jquery ">=1.8"
 
 snake-case@^1.0.0, snake-case@^1.1.0:
   version "1.1.2"

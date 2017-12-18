@@ -22,7 +22,8 @@ module.exports = (grunt) ->
 
       # Bower components
       bootstrap: 'bower/bootstrap-sass-official/assets'
-      jquery: 'bower/jquery/dist'
+      jquery: 'node_modules/jquery.2/node_modules/jquery/dist'
+      # jquery: 'node_modules/jquery/dist'
 
     # Clean - Empties build directories
     # ------------------------------------------------------------------------ #
@@ -184,6 +185,8 @@ module.exports = (grunt) ->
         files: '<%= path.public %>/assets/js/scripts.min.js': [
           # '<%= path.public %>/assets/js/lib/jquery.js'
           # '<%= path.public %>/assets/js/lib/bootstrap.js'
+          '<%= path.jquery %>/jquery.min.js'
+          'node_modules/smoothstate/jquery.smoothState.min.js'
           '<%= path.public %>/assets/js/scripts.js'
         ]
 
@@ -228,6 +231,10 @@ module.exports = (grunt) ->
       #   ]
       #   tasks: ['sass:bootstrap']
       stylus:
+        options: [
+          compress: true
+          "include css": true
+        ]
         files: [
           '<%= path.dev %>/assets/css/**/*'
         ]

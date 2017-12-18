@@ -31,23 +31,22 @@
 
   </head>
 
-  <body class="{{ craft.request.getSegment(1) ?: 'home' }}">
+  <body page-type="{{ craft.request.getSegment(1) ?: 'home' }}">
 
-    {% include "_partials/header.html" %}
+    <div id="wrapper">
 
-    {# Page content #}
-    <div id="container">
-    {% block content %}{% endblock %}
+      {% include "_partials/header.html" %}
+
+      {# Page content #}
+      <div id="container">
+      {% block content %}{% endblock %}
+      </div>
+
+      {% include "_partials/footer.html" %}
+
     </div>
 
-    {% include "_partials/footer.html" %}
-
-    {# Site-wide javascript #}
-    {% if craft.config.env == "local" %}
-      <script src="{{ craft.config.tmpl.js }}/scripts.js"></script>
-    {% else %}
-      <script src="{{ craft.config.tmpl.js }}/scripts.min.js"></script>
-    {% endif %}
+    <script src="{{ craft.config.tmpl.js }}/scripts.min.js"></script>
 
     {% block page_script_tags %}{% endblock %}
 

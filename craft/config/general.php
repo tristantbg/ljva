@@ -30,7 +30,7 @@ return array(
    */
 
   // Site environment
-  "env" => CRAFT_ENVIRONMENT,
+  "env" => "local",
 
   'environmentVariables' => array(
     'basePath' => './',

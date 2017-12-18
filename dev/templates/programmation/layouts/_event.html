@@ -1,4 +1,13 @@
+
+{% if event.url != null %}
+  {% set eventUrl = event.url %}
+{% else %}
+  {% set eventUrl = "#{siteUrl}programmation/event/#{event.id}/#{event.repeating ? event.startDate.format('Y/m/d')}" %}
+{% endif %}
+
 <div class="event-item">
-    <a class="link-overlay" href="{{ siteUrl }}programmation/event/{{ event.id }}/{{ event.repeating ? event.startDate.format('Y/m/d') }}"></a>
-    {% include "programmation/layouts/_event_infos.html" %}
+    <a class="link-overlay" href="{{eventUrl}}"></a>
+    <div class="inner">
+      {% include "programmation/layouts/_event_infos.html" %}
+    </div>
 </div>

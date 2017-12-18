@@ -29,27 +29,16 @@
 {% set page = "month" %}
 
 {% block content %}
-
-
-    <!-- <div class="page-header calendar">
-        <h2>{{ month.date.format('F Y') }}</h2>
-        <div id="pagination" class="lead">
-          <a href="{{ siteUrl }}programmation/month/{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{{ month.previousDate.format('Y/m') }}">
-              &larr; {{ month.previousDate.format('M') }}
-          </a>
-          <a href="{{ siteUrl }}programmation/month/{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{{ month.nextDate.format('Y/m') }}">
-              {{ month.nextDate.format('M') }} &rarr;
-          </a>
-        </div>
-    </div> -->
-    <div id="event-pagination" class="row lead">
-      <a href="{{ siteUrl }}programmation/month/{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{{ month.previousDate.format('Y/m') }}">
-          &larr; {{ month.previousDate.format('F') }}
+    
+    <div id="event-pagination" class="row">
+      <a class="previous-month" href="{{ siteUrl }}programmation/month/{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{{ month.previousDate.format('Y/m') }}">
+          <span class="button"><</span><span class="button">{{ month.previousDate.format('F')|capitalize }}</span><span class="button">{{ month.nextDate.format('Y')|capitalize }}</span>
       </a>
-      <a href="{{ siteUrl }}programmation/month/{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{{ month.nextDate.format('Y/m') }}">
-          {{ month.nextDate.format('F') }} &rarr;
+      <a class="next-month" href="{{ siteUrl }}programmation/month/{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{{ month.nextDate.format('Y/m') }}">
+          <span class="button">{{ month.nextDate.format('F')|capitalize }}</span><span class="button">{{ month.nextDate.format('Y')|capitalize }}</span><span class="button">></span>
       </a>
     </div>
+    
     <div id="events" class="row" calendar-type="month">
         {% for event in month.events %}
             {% include "programmation/layouts/_event.html" %}

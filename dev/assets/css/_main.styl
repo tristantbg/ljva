@@ -55,9 +55,15 @@ h2
 .lead
 	text-transform uppercase
 
-.small
+.small, #main-menu
 	text-transform uppercase
 	font-size $font-small
+
+.button
+	border 1px solid
+	padding .1em .3em .1em
+	& + .button
+		border-left none
 
 // ::selection
 // 	background alpha($main-text-color, 0.2)
@@ -98,17 +104,18 @@ a, a:hover, a:visited, a:focus
 
 #container
 	span(1)
-	margin-top ($heading + $padding * 2)
+	margin-top $headerSize
 	padding $padding
+	padding-left (9rem + $padding*4)
 	width 'calc(100% - %s)' % $padding
 	background-color $main-title-color
 	background-color var(--main-title-color)
-	min-height 'calc(100vh - %s)' % ($heading + $padding * 2)
+	min-height 'calc(100vh - %s)' % ($headerSize)
 	h1, h2
-		color $main-bg-color
-		color var(--main-bg-color)
+		color $main-text-color
+		color var(--main-text-color)
 	& > .row
-		padding-left 12rem
+		// padding-left 12rem
 
 body.is-loading
 	#page-content

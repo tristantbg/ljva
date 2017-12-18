@@ -1,6 +1,18 @@
+#main-menu
+	position fixed
+	top ($headerSize + $padding)
+	left 0
+	width (9rem + $padding*3)
+	padding $padding
+	background $main-text-color
+	background var(--main-text-color)
+	color $main-title-color
+	color var(--main-title-color)
+	height 'calc(100vh - %s)' % ($headerSize + $padding)
+
 #java-card
 	span(6/12)
-	height 25rem
+	height 20rem
 	position fixed
 	bottom 0
 	left 0
@@ -8,19 +20,21 @@
 	display flex
 	justify-content stretch
 	transition transform $containerTransition $kinetic
-	transform 'translateX(calc(-100% + 10rem + %s)) translateZ(0)' % ($padding*2)
+	transform 'translateX(calc(-100% + 9rem + %s)) translateZ(0)' % ($padding*2)
 	background-color $main-bg-color
 	background-color var(--main-bg-color)
 	&:hover
 		transform none
-	#main-menu
+	#credits
 		flex 1 1 auto
 		padding-right $padding
-		.menu-item
-			column(1/2, $cycle:2)
-			text-transform uppercase
 	#infos-ticket
-		flex 0 0 10rem
+		flex 0 0 9rem
 		display flex
 		flex-direction column
 		justify-content space-between
+		a#logo
+			padding 0.5rem 1rem 0 0
+			svg
+				fill $main-text-color
+				fill var(--main-text-color)

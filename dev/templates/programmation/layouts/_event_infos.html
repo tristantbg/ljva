@@ -19,7 +19,7 @@
   </div>   
   
   <div class="event-subheader small event-infos--item">
-      <div class="event-calendar"><span>{{event.calendar.name}}</span></div>
+      <div class="event-calendar"><span class="button">{{event.calendar.name}}</span></div>
       <div class="event-pratical">
         {% if event.tags is defined and event.tags is not empty %}
         <div class="event-pratical--style">
@@ -63,8 +63,13 @@
   {# if event.artists is defined and event.artists is not empty #}
     <div class="event-artists lead event-infos--item">
       {% for artist in event.artists %}
+        {% if loop.index <= 4 %}
         <div class="row">{{artist.title}}</div>
+        {% endif %}
       {% endfor %}
+      {% if event.artists.total() > 4 %}
+        <div class="row">…</div>
+      {% endif %}
     </div>
   {# endif #}
 </div>
