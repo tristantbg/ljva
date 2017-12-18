@@ -30,6 +30,7 @@
     "grunt-contrib-stylus": "^1.2.0",
     "jeet": "^7.2.0",
     "jquery.2": "^1.0.0",
+    "lazysizes": "^4.0.1",
     "rupture": "^0.7.1",
     "smoothstate": "^0.7.2",
     "stylus": "^0.54.5"

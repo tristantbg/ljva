@@ -33,6 +33,8 @@ body
 	line-height 1
 	color $main-text-color
 	color var(--main-text-color)
+	+below($md)
+		font-size ($font-size*1.5)
 
 p
 	margin-bottom 1em
@@ -58,12 +60,22 @@ h2
 .small, #main-menu
 	text-transform uppercase
 	font-size $font-small
+	+below($md)
+		font-size ($font-small*1.5)
 
 .button
 	border 1px solid
 	padding .1em .3em .1em
+	text-transform uppercase
 	& + .button
 		border-left none
+	&.active, &.activable:hover
+		background $main-text-color
+		background var(--main-text-color)
+		color $main-title-color
+		color var(--main-title-color)
+		border-color $main-text-color
+		border-color var(--main-text-color)
 
 // ::selection
 // 	background alpha($main-text-color, 0.2)
@@ -90,7 +102,7 @@ a, a:hover, a:visited, a:focus
 	cursor pointer
 
 .lazy, .plyr
-	transition opacity 300ms ease
+	transition opacity 150ms ease
 	opacity 0
 
 .lazy.lazyloaded, .lazy.flickity-lazyloaded, .plyr.plyr--ready
@@ -106,14 +118,21 @@ a, a:hover, a:visited, a:focus
 	span(1)
 	margin-top $headerSize
 	padding $padding
-	padding-left (9rem + $padding*4)
-	width 'calc(100% - %s)' % $padding
+	// width 'calc(100% - %s)' % ($headerSize*2.8)
+	width 'calc(100% - %s)' % ($padding)
 	background-color $main-title-color
 	background-color var(--main-title-color)
 	min-height 'calc(100vh - %s)' % ($headerSize)
-	h1, h2
-		color $main-text-color
-		color var(--main-text-color)
+	+above($md + 1)
+		padding-left (9rem + $padding*4)
+	h1, h2, .title
+		// color $main-text-color
+		// color var(--main-text-color)
+		color $main-bg-color
+		color var(--main-bg-color)
+		svg
+			fill $main-bg-color
+			fill var(--main-bg-color)
 	& > .row
 		// padding-left 12rem
 

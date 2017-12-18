@@ -9,6 +9,8 @@
 	color $main-title-color
 	color var(--main-title-color)
 	height 'calc(100vh - %s)' % ($headerSize + $padding)
+	+below($md)
+		display none
 
 #java-card
 	span(6/12)

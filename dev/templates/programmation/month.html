@@ -24,27 +24,62 @@
     calendar: calendarHandle
 }) %}
 
-{% set mainTitle = month.date.format('F Y')|capitalize %}
-{% set pageTitle = month.date.format('F Y')|capitalize %}
+{% set calendars = craft.calendar.calendars({
+  order: "name",
+  sort: "asc"
+}) %}
+
+{% if calendarHandle != null %}
+  {% set mainTitle = "#{calendarHandle|capitalize}: #{month.date.format('F Y')|capitalize}" %}
+  {% set pageTitle = mainTitle %}
+{% else %}
+  {% set mainTitle = month.date.format('F Y')|capitalize %}
+  {% set pageTitle = mainTitle %}
+{% endif %}
 {% set page = "month" %}
 
 {% block content %}
     
-    <div id="event-pagination" class="row">
-      <a class="previous-month" href="{{ siteUrl }}programmation/month/{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{{ month.previousDate.format('Y/m') }}">
-          <span class="button"><</span><span class="button">{{ month.previousDate.format('F')|capitalize }}</span><span class="button">{{ month.nextDate.format('Y')|capitalize }}</span>
-      </a>
-      <a class="next-month" href="{{ siteUrl }}programmation/month/{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{{ month.nextDate.format('Y/m') }}">
-          <span class="button">{{ month.nextDate.format('F')|capitalize }}</span><span class="button">{{ month.nextDate.format('Y')|capitalize }}</span><span class="button">></span>
-      </a>
-    </div>
     
     <div id="events" class="row" calendar-type="month">
-        {% for event in month.events %}
-            {% include "programmation/layouts/_event.html" %}
-        {% else %}
-            <!-- <h3 class="lead">Programmation bientôt disponible</h3> -->
+        <div id="events-items">
+          {% for event in month.events %}
+              {% include "programmation/layouts/_event.html" %}
+          {% else %}
+              <!-- <h3 class="lead">Programmation bientôt disponible</h3> -->
+          {% endfor %}
+        </div>
+    </div>
+
+    <div id="event-pagination" class="row">
+      <a class="previous-month title" href="{{ siteUrl }}programmation/month/{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{{ month.previousDate.format('Y/m') }}">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   viewBox="-46 -38.9 100 88.7" enable-background="new -46 -38.9 100 88.7" xml:space="preserve">
+          <polygon points="-46,5.4 -1.9,49.9 7.1,41.2 -22.4,11.7 54,11.7 54,-0.6 -22.6,-0.6 7.1,-30.2 -1.9,-38.9 -46,5.3 -45.9,5.4 "/>
+          </svg>
+          <span>{{ month.previousDate.format('F')|capitalize }}</span>
+      </a>
+      
+      <!--
+      <div>
+        {% for calendar in calendars %}
+          <!-- <span class="button{% if calendarHandle == calendar.handle or calendarHandle == null %} active{% endif %}">
+          <span class="button">
+            <a href="{{ siteUrl }}programmation/month/calendar/{{ calendar.handle }}">
+              {{ calendar.name }}
+            </a>
+          </span>
         {% endfor %}
+      </div> 
+      -->
+
+      <a class="next-month title" href="{{ siteUrl }}programmation/month/{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{{ month.nextDate.format('Y/m') }}">
+          <span>{{ month.nextDate.format('F')|capitalize }}</span>
+          <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   viewBox="-46 -38.9 100 88.7" enable-background="new -46 -38.9 100 88.7" xml:space="preserve">
+          <polygon points="54,5.6 9.9,-38.9 0.9,-30.2 30.4,-0.7 -46,-0.7 -46,11.6 30.6,11.6 0.9,41.2 9.9,49.9 54,5.7 53.9,5.6 "/>
+          </svg>
+      </a>
     </div>
 
 {% endblock %}

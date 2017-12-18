@@ -21,159 +21,149 @@
     occurrenceLimit: 10
 }) %}
                 
-
-{% set mainTitle = event.startDate.format('d M Y') %}
-{% set pageTitle = event.title %}
+{% if event %}
+  {# set mainTitle = event.startDate.format('j M Y') #}
+  {% set mainTitle = event.calendar.name|capitalize %}
+  {% set pageTitle = event.title %}
+{% else %}
+  {% set mainTitle = "Introuvable" %}
+  {% set pageTitle = "Introuvable" %}
+{% endif %}
 {% set page = "event" %}
 
 {% block content %}
 
-    
-	<div class="page-header">
-		<h1>{{ event.title }}</h1>
-	</div>
+	<div class="event-page">
 
+    {% if event %}
 
-	<div class="row">
-		<div class="col-md-9">
-			<div id="events_calendar">
+		<div class="row">
+        <div class="featured-image">
+          {% for asset in event.featuredImage %}
+            <img class="lazy lazyload" data-src="{{ asset.getUrl('header') }}" width="100%" height="100%" />
+            <noscript>
+              <img src="{{ asset.getUrl('header') }}" width="100%" height="100%" />
+            </noscript>
+          {% endfor %}
+        </div>
+        <div class="header-content">
 
-                
-                    {% if event %}
+          <h1>{{event.title}}</h1>
 
-                    <div class="btn-group pull-right" role="group" aria-label="actions">
-                        <a href="{{ siteUrl }}programmation/export/event/{{ segment2 }}"
-                           class="btn btn-default btn-sm"
-                           role="button">
-                            <span class="glyphicon glyphicon-export" aria-hidden="true"></span>
-                            &nbsp;Export Event
-                        </a>
-
-                        {% if craft.calendar.canEditEvent(event) %}
-                            <a href="{{ siteUrl }}programmation/edit/event/{{ segment2 }}"
-                               class="btn btn-warning btn-sm"
-                               role="button">
-                                <span class="glyphicon glyphicon-edit"></span>
-                                &nbsp;Edit
-                            </a>
+          <div class="row mt3">
+            <div class="c2 fl">
+              <div class="event-calendar">
+                <a href="{{ siteUrl }}programmation/month/calendar/{{ event.calendar.handle }}">
+                  <span class="button lead">{{event.calendar.name}}</span>
+                </a>  
+              </div>
+            </div>
+            <div class="c5 fl">
+              <div class="event-pratical lead">
+                <div class="event-pratical--time">
+                  <div>{{event.startDate.format('j F Y')}}</div>
+                  {% if event.allDay %}
+                      Toute la journée
+                  {% else %}
+                      {% if event.startDate.format("i") != '00' %}
+                        {{ event.startDate.format("H:i") }} - 
+                      {% else %}
+                        {{ event.startDate.format("H") }}H - 
+                      {% endif %}
+                      {% if event.noEnd %}
+                        Aube
+                      {% else %}
+                        {% if event.multiDay %}
+                            | {{ event.endDate.format("l, F j, Y \\a\\t g:i") }}
+                        {% else %}
+                            {% if event.endDate.format("i") != '00' %}
+                              {{ event.endDate.format("H:i") }}
+                            {% else %}
+                              {{ event.endDate.format("H") }}H
+                            {% endif %}
                         {% endif %}
-                    </div>
-
-                    <h3>{{ event.title }}</h3>
-                    <table class="table table-striped" style="margin-top: 20px;">
-                        <tr>
-                            <th style="width: 20%;">Calendar</th>
-                            <td>
-                                <span class="glyphicon glyphicon-calendar" style="color: {{ event.calendar.color }};"></span>&nbsp;
-                                <a href="{{ siteUrl }}programmation/calendars/{{ event.calendar.handle }}" style="color: {{ event.calendar.color }};">
-                                    {{ event.calendar.name }}
-                                </a>
-                            </td>
-                        </tr>
-                        {% if event.location is defined %}
-                            <tr>
-                                <th>Location</th>
-                                <td>
-                                    {{ event.location }}
-                                </td>
-                            </tr>
-                        {% endif %}
-                        <tr>
-                            <th>Date</th>
-                            <td>
-                                {{ event.startDate.format('l, F j, Y') }}
-
-                                {% if event.allDay %}
-                                    (all day)
-                                {% else %}
-                                    at {{ event.startDate.format("g:ia") }} -
-                                    {% if event.multiDay %}
-                                        <br />{{ event.endDate.format("l, F j, Y \\a\\t g:ia") }}
-                                    {% else %}
-                                        {{ event.endDate.format("g:ia") }}
-                                    {% endif %}
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Duration</th>
-                            <td>
-                                <span class="glyphicon glyphicon-time"></span>&nbsp;
-                                {{ event.duration.humanReadable }}
-                            </td>
-                        </tr>
-                        {% if event.description is defined %}
-                            <tr>
-                                <th>Details</th>
-                                <td>{{ event.description }}</td>
-                            </tr>
-                        {% endif %}
-                        <tr>
-                            <th>Repeats?</th>
-                            <td>
-                                {% if event.repeating %}
-                                    <span class="glyphicon glyphicon-repeat"></span>&nbsp;
-                                    Repeats {{ event.readableRepeatRule }}
-                                {% else %}
-                                    No
-                                {% endif %}
-                            </td>
-                        </tr>
-
-                        {% if event.repeating %}
-                        <tr>
-                            <th>Upcoming Recurrences</th>
-                            <td>
-                                {% for occurrence in event.occurrences %}
-                                    {{ loop.index == 1 ? '<ul class="list-group">' }}
-
-                                    <li class="list-group-item" style="border-left: 5px solid {{ occurrence.calendar.color }};">
-                                        <a href="{{ siteUrl }}programmation/event/{{ occurrence.id }}/{{ occurrence.startDate.format("Y/m/d") }}"
-                                           class="badge"
-                                           style="background-color: {{ occurrence.calendar.color }}; color: {{ occurrence.calendar.contrastColor }} !important;">
-                                            View Recurrence
-                                        </a>
-                                        <a href="{{ siteUrl }}programmation/day/{{ occurrence.startDate.format("Y/m/d") }}" class="badge">
-                                            View Day in Calendar
-                                        </a>
-                                        <span class="glyphicon glyphicon-time"></span>&nbsp;
-                                        {{ occurrence.startDate.format("l, F j, Y") }}
-                                        {% if occurrence.allDay %}
-                                            (all day)
-                                        {% else %}
-                                            at {{ occurrence.startDate.format("g:ia") }}
-                                            {% if occurrence.multiDay %}
-                                                <br />{{ occurrence.endDate.format("l, F j, Y \\a\\t g:ia") }}
-                                            {% else %}
-                                                {{ occurrence.endDate.format("g:ia") }}
-                                            {% endif %}
-                                        {% endif %}
-                                    </li>
-
-                                    {{ loop.index == event.occurrenceCount ? '</ul>' }}
-                                {% else %}
-                                    <p>No occurrences found for this timeframe (next 6 months from today).</p>
-                                {% endfor %}
-                            </td>
-                        </tr>
-                        {% endif %}
-                    </table>
-
-                {% else %}
-                    <div class="alert alert-danger" role="alert">
-                        <p class="lead">
-                            Sorry, no event was found.
-                        </p>
-                    </div>
+                      {% endif %}
+                  {% endif %}
+                </div>
+                {% if event.tags is defined and event.tags is not empty %}
+                <div class="event-pratical--style">
+                  {% for style in event.tags %}
+                    <span>{{style}}</span>
+                  {% endfor %}
+                </div>
+                {% endif %}      
+                {% if event.tarif is defined and event.tarif is not empty %}
+                <div class="event-pratical--price mt1">
+                  {{event.tarif}}
+                </div>
                 {% endif %}
-			</div>
+              </div>
+            </div>
+          </div>
 
-		</div>
+          {% if event.artists is defined and event.artists is not empty %}
+            <div class="row my3">
+              <div class="c2 fl lead">
+                Avec
+              </div>
+              <div class="c10 fl">
+                <div class="event-artists lead event-infos--item">
+                  {% for artist in event.artists %}
+                    <div class="row title"><a href="{{artist.url}}" data-target="artiste">{{artist.title}}</a></div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
 
-		<div class="col-md-3">
-            {% include "programmation/layouts/_sidebar.html" %}
-		</div>
+          {% if event.billetterie is defined and event.billetterie|length %}
+            <div id="billetterie" class="row">
+              {% for ticket in event.billetterie %}
+                {% if ticket.url|length %}
+                  <a href="{{ticket.url}}" target="_blank" rel="nofollow noopener">{{ticket.type}}</a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+        </div>
+    </div>
+
+    <div class="additional-content">
+      <h3>Description</h3>
+    </div>
+
+    <div class="page-content">
+      
+      {% if event.body is defined and event.body is not empty %}
+      <div id="description">
+        {{event.body}}
+      </div>
+      {% endif %}
+
+      {% if event.embeds|length %}
+      <div id="page-embeds" class="row">
+        {% for asset in event.embeds %}
+          {% set embed = craft.embeddedAssets.fromAsset(asset) %}
+          {% if embed %}
+            <div class="embed-item">{{ embed.safeHtml|raw }}</div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
 
     </div>
+
+    {% else %}
+
+    <div class="page-content">
+      <p class="lead">Évènement introuvable</p>
+    </div>
+
+    {% endif %}
+
+  </div>
+
+</div>
 
 {% endblock %}

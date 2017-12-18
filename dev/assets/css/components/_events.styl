@@ -1,75 +1,96 @@
+.event-pratical
+	.event-pratical--style
+		span:not(:last-child)::after
+			content ', '
+	.event-pratical--price
+		display block
+
 #event-pagination
-	margin-top .2em
 	display flex
 	justify-content space-between
 	text-transform uppercase
+	a
+		display inline-flex
+		align-items center
+		svg
+			height 0.55em
+	.previous-month
+		svg
+			margin-right 0.2em
+	.next-month
+		svg
+			margin-left 0.2em
 	&::after
 		display none
 
 #events
-	margin-top ($font-size*2)
-	display flex
-	justify-content stretch
-	flex-wrap wrap
-	.event-item
-		position relative
-		flex 0 1 25%
-		padding-right ($font-size*2)
-		margin-bottom ($font-size*2)
-		&:nth-child(4n)
-			padding-right 0
-		.inner
-			height 100%
-			padding $padding
-			border-top 1px solid
-			border-left 1px solid
-		.event-day
-			position absolute
-			padding 0 0.5em
-			top -0.5em
-			left "calc(%s - 0.5em)" % $padding
-			background-color $main-title-color
-			background-color var(--main-title-color)
-		.link-overlay
-			position absolute
-			top 0
-			left 0
-			width 100%
-			height 100%
-		.event-infos
-			height 100%
-			display flex
-			flex-direction column
-			justify-content space-between
-		.event-infos--item:not(:last-child)
-			margin-bottom 1em
-		.event-header
-			display flex
-			min-height 2em
-			.event-day-num
-				flex 0 0 ($font-size*3)
-		.event-image
-			width 100%
-			padding-left ($font-size*3)
-			img
-				object-fit contain
-				object-position center left
-		.event-subheader
-			flex-grow 1
-			display flex
-			.event-calendar
-				flex 0 0 ($font-size*3)
-				margin-top .3em
-			.event-pratical
-				div
-					display inline
-				div:not(.event-pratical--price):not(:first-child)::before
-					content '\00a0|\00a0'
-				.event-pratical--style
-					span:not(:last-child)::after
-						content ', '
-				.event-pratical--price
-					display block
-		.event-artists
-			padding-left ($font-size*3)
-			min-height 3em
+	// margin-top ($font-size*2)
+	min-height "calc(100vh - %s)" % ($headerSize * 2)
+	#events-items
+		display flex
+		justify-content stretch
+		flex-wrap wrap
+		.event-item
+			position relative
+			column(1/4, $gutter:($font-size), $cycle:4)
+			margin-bottom ($font-size*2)
+			&:nth-child(4n)
+				padding-right 0
+			+below($md)
+				column(1/2, $gutter:($font-size), $cycle:2)
+			+below($sm)
+				stack()
+				margin-right 0 !important
+			.inner
+				height 100%
+				padding $padding
+				border-top 1px solid
+				border-left 1px solid
+			.event-day
+				position absolute
+				padding 0 0.5em
+				top -0.5em
+				left "calc(%s - 0.5em)" % $padding
+				background-color $main-title-color
+				background-color var(--main-title-color)
+			.link-overlay
+				position absolute
+				top 0
+				left 0
+				width 100%
+				height 100%
+			.event-infos
+				height 100%
+				display flex
+				flex-direction column
+				justify-content space-between
+			.event-infos--item:not(:last-child)
+				margin-bottom 1em
+			.event-header
+				display flex
+				min-height 2em
+				.event-day-num
+					flex 0 0 ($font-size*3)
+					+below($md)
+						flex 0 0 ($font-size*4)
+			.event-image
+				width 100%
+				padding-left ($font-size*3)
+				+below($md)
+					padding-left ($font-size*4)
+				img
+					object-fit contain
+					object-position center left
+			.event-subheader
+				flex-grow 1
+				display flex
+				.event-calendar
+					flex 0 0 ($font-size*3)
+					margin-top .3em
+					+below($md)
+						flex 0 0 ($font-size*4)
+			.event-artists
+				padding-left ($font-size*3)
+				min-height 3em
+				+below($md)
+					padding-left ($font-size*4)
