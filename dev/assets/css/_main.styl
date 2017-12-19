@@ -54,6 +54,14 @@ h2
 	color $main-title-color
 	color var(--main-title-color)
 
+h3
+	text-transform uppercase
+	&:not(:last-child)
+		margin-bottom 1em
+
+section:not(:last-child)
+	margin-bottom ($padding*2)
+
 .lead
 	text-transform uppercase
 
@@ -117,7 +125,8 @@ a, a:hover, a:visited, a:focus
 #container
 	span(1)
 	margin-top $headerSize
-	padding $padding
+	padding ($padding*2)
+	padding-bottom $headerSize
 	// width 'calc(100% - %s)' % ($headerSize*2.8)
 	width 'calc(100% - %s)' % ($padding)
 	background-color $main-title-color

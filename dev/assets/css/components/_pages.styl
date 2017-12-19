@@ -1,20 +1,25 @@
 .event-page
 	span(1)
 	.featured-image
-		span(5/12)
-		height ($headerSize*7)
+		span(4/12)
+		height ($headerSize*8)
+		&.fixed
+			position fixed
+		&:not(.fixed)
+			//opacity 0
 		img
 			object-fit contain
 			object-position top left
 	.header-content
-		span(6/12, $offset: 1/12)
+		span(6/12, $offset: 2/12)
 		.event-calendar
 			margin-top .3em
-	.additional-content
-		span(6/12)
-		padding-right ($font-size*3)
+		.event-artists .title
+			color $main-text-color !important
+			color var(--main-text-color) !important
 	.page-content
-		span(6/12)
+		span(6/12, $offset: 6/12)
 		p
-			// font-size ($font-size+0.1)
-			line-height 1.6
+			line-height 1.4
+			&:not(:last-child)
+				margin-bottom 1em

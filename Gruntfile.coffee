@@ -187,6 +187,7 @@ module.exports = (grunt) ->
           # '<%= path.public %>/assets/js/lib/bootstrap.js'
           '<%= path.jquery %>/jquery.min.js'
           'node_modules/lazysizes/lazysizes.min.js'
+          'node_modules/infinite-scroll/dist/infinite-scroll.pkgd.min.js'
           'node_modules/smoothstate/jquery.smoothState.min.js'
           '<%= path.public %>/assets/js/scripts.js'
         ]

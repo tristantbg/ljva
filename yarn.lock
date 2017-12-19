@@ -271,6 +271,10 @@ decamelize@^1.0.0, decamelize@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
 
+desandro-matches-selector@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/desandro-matches-selector/-/desandro-matches-selector-2.0.2.tgz#717beed4dc13e7d8f3762f707a6d58a6774218e1"
+
 dot-case@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/dot-case/-/dot-case-1.1.2.tgz#1e73826900de28d6de5480bc1de31d0842b06bec"
@@ -290,6 +294,10 @@ escape-string-regexp@^1.0.0, escape-string-regexp@^1.0.2, escape-string-regexp@^
 "esprima@~ 1.0.2":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-1.0.4.tgz#9f557e08fc3b4d26ece9dd34f8fbf476b62585ad"
+
+ev-emitter@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/ev-emitter/-/ev-emitter-1.1.1.tgz#8f18b0ce5c76a5d18017f71c0a795c65b9138f2a"
 
 eventemitter2@~0.4.13:
   version "0.4.14"
@@ -327,6 +335,12 @@ findup-sync@^0.1.2, findup-sync@~0.1.2:
   dependencies:
     glob "~3.2.9"
     lodash "~2.4.1"
+
+fizzy-ui-utils@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/fizzy-ui-utils/-/fizzy-ui-utils-2.0.5.tgz#d72debc74d2c9d272dbcbb7b001707897f6c3210"
+  dependencies:
+    desandro-matches-selector "^2.0.0"
 
 fs.realpath@^1.0.0:
   version "1.0.0"
@@ -574,6 +588,13 @@ indent-string@^2.1.0:
   resolved "https://registry.yarnpkg.com/indent-string/-/indent-string-2.1.0.tgz#8e2d48348742121b4a8218b7a137e9a52049dc80"
   dependencies:
     repeating "^2.0.0"
+
+infinite-scroll@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/infinite-scroll/-/infinite-scroll-3.0.2.tgz#90a62e2fbe4cb0a25dc27604b0c5ca66ff99cb85"
+  dependencies:
+    ev-emitter "^1.1.0"
+    fizzy-ui-utils "^2.0.5"
 
 inflight@^1.0.4:
   version "1.0.6"

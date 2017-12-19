@@ -33,11 +33,11 @@
 
 {% block content %}
 
-	<div class="event-page">
+  <div class="event-page">
 
     {% if event %}
 
-		<div class="row">
+    <div class="row">
         <div class="featured-image">
           {% for asset in event.featuredImage %}
             <img class="lazy lazyload" data-src="{{ asset.getUrl('header') }}" width="100%" height="100%" />
@@ -50,7 +50,7 @@
 
           <h1>{{event.title}}</h1>
 
-          <div class="row mt3">
+          <div class="row mt2">
             <div class="c2 fl">
               <div class="event-calendar">
                 <a href="{{ siteUrl }}programmation/month/calendar/{{ event.calendar.handle }}">
@@ -61,39 +61,46 @@
             <div class="c5 fl">
               <div class="event-pratical lead">
                 <div class="event-pratical--time">
-                  <div>{{event.startDate.format('j F Y')}}</div>
+                  <div>{% if event.multiDay %}Du {% endif %}{{event.startDate.format('j F Y')}}</div>
                   {% if event.allDay %}
                       Toute la journée
                   {% else %}
                       {% if event.startDate.format("i") != '00' %}
-                        {{ event.startDate.format("H:i") }} - 
+                        {{ event.startDate.format("H:i") }}
                       {% else %}
-                        {{ event.startDate.format("H") }}H - 
+                        {{ event.startDate.format("H") }}H
                       {% endif %}
                       {% if event.noEnd %}
                         Aube
                       {% else %}
                         {% if event.multiDay %}
-                            | {{ event.endDate.format("l, F j, Y \\a\\t g:i") }}
+                            <div>Au {{ event.endDate.format("j M Y") }}</div>
+                            <div>
+                              {% if event.endDate.format("i") != '00' %}
+                                {{ event.endDate.format("H:i") }}
+                              {% else %}
+                                {{ event.endDate.format("H") }}H
+                              {% endif %}
+                            </div>
                         {% else %}
                             {% if event.endDate.format("i") != '00' %}
-                              {{ event.endDate.format("H:i") }}
+                               - {{ event.endDate.format("H:i") }}
                             {% else %}
-                              {{ event.endDate.format("H") }}H
+                               - {{ event.endDate.format("H") }}H
                             {% endif %}
                         {% endif %}
                       {% endif %}
                   {% endif %}
                 </div>
                 {% if event.tags is defined and event.tags is not empty %}
-                <div class="event-pratical--style">
+                <div class="event-pratical--style mt1">
                   {% for style in event.tags %}
                     <span>{{style}}</span>
                   {% endfor %}
                 </div>
                 {% endif %}      
                 {% if event.tarif is defined and event.tarif is not empty %}
-                <div class="event-pratical--price mt1">
+                <div class="event-pratical--price">
                   {{event.tarif}}
                 </div>
                 {% endif %}
@@ -102,7 +109,7 @@
           </div>
 
           {% if event.artists is defined and event.artists is not empty %}
-            <div class="row my3">
+            <section class="row my2">
               <div class="c2 fl lead">
                 Avec
               </div>
@@ -113,43 +120,43 @@
                   {% endfor %}
                 </div>
               </div>
-            </div>
-          {% endif %}
-
-          {% if event.billetterie is defined and event.billetterie|length %}
-            <div id="billetterie" class="row">
-              {% for ticket in event.billetterie %}
-                {% if ticket.url|length %}
-                  <a href="{{ticket.url}}" target="_blank" rel="nofollow noopener">{{ticket.type}}</a>
-                {% endif %}
-              {% endfor %}
-            </div>
+            </section>
           {% endif %}
 
         </div>
     </div>
 
-    <div class="additional-content">
-      <h3>Description</h3>
-    </div>
-
     <div class="page-content">
       
       {% if event.body is defined and event.body is not empty %}
-      <div id="description">
+      <section id="description">
+        <h2 class="mb2">Infos</h2>
         {{event.body}}
-      </div>
+      </section>
       {% endif %}
 
       {% if event.embeds|length %}
-      <div id="page-embeds" class="row">
+      <section id="page-embeds" class="row">
         {% for asset in event.embeds %}
           {% set embed = craft.embeddedAssets.fromAsset(asset) %}
           {% if embed %}
             <div class="embed-item">{{ embed.safeHtml|raw }}</div>
           {% endif %}
         {% endfor %}
-      </div>
+      </section>
+    {% endif %}
+
+    {% if event.billetterie is defined and event.billetterie|length %}
+      <section id="billetterie" class="row">
+        <h2 class="mb2">Réservation</h2>
+        {% for ticket in event.billetterie %}
+          {% if ticket.type == "yurplan" %}
+            <a href="{{ticket.yurplanUrl}}" target="_blank" rel="nofollow noopener"><h3>Yurplan</h3></a>
+          {% elseif ticket.type == "digitick" %}
+            <a href="{{ticket.digitickUrl}}" target="_blank" rel="nofollow noopener"><h3>Digitick</h3></a>
+          {% endif %}
+        {% endfor %}
+      </section>
     {% endif %}
 
     </div>

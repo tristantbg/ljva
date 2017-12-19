@@ -28,6 +28,7 @@
   "dependencies": {
     "feedify": "https://github.com/sarahdayan/feedify",
     "grunt-contrib-stylus": "^1.2.0",
+    "infinite-scroll": "^3.0.2",
     "jeet": "^7.2.0",
     "jquery.2": "^1.0.0",
     "lazysizes": "^4.0.1",
