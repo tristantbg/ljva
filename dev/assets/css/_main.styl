@@ -22,7 +22,7 @@ body,html
 
 html
 	font-size 10px
-	+below($md)
+	+below($sm)
 		font-size 1.8vmin
 
 body
@@ -33,7 +33,7 @@ body
 	line-height 1
 	color $main-text-color
 	color var(--main-text-color)
-	+below($md)
+	+below($sm)
 		font-size ($font-size*1.5)
 
 p
@@ -44,23 +44,39 @@ p:last-child
 	margin-bottom 0
 
 
-h1, h2, .title, .section-title
+h1, h2, h3, .title, .section-title, .menu-item, #site-title::after, [data-target="back"]::after
 	text-transform uppercase
 	font-size $heading
-	line-height 0.93
+	// line-height 0.93
 	letter-spacing -.03em
 
 h2
 	color $main-title-color
 	color var(--main-title-color)
 
-h3
+h4
+	text-transform uppercase
+
+h3, .section-title
 	text-transform uppercase
 	&:not(:last-child)
-		margin-bottom 1em
+		margin-bottom ($padding*2)
 
 section:not(:last-child)
-	margin-bottom ($padding*2)
+	margin-bottom $headerSize
+
+section.outline
+	position relative
+	box-shadow -1px -1px
+	padding ($padding*2) 0 ($padding) ($padding*2)
+	h3.section-title
+		position absolute
+		margin-bottom 0
+		background-color $main-title-color
+		background-color var(--main-title-color)
+		top -0.7em
+		left -0.1em
+		padding 0.2em 0.2em 0.2em 0
 
 .lead
 	text-transform uppercase
@@ -116,24 +132,34 @@ a, a:hover, a:visited, a:focus
 .lazy.lazyloaded, .lazy.flickity-lazyloaded, .plyr.plyr--ready
 	opacity 1
 
+[event-target]
+	cursor pointer
+
 .row
 	span(1)
 
 #main
 	span(1)
+	
+#wrapper
+	span(1)
 
 #container
 	span(1)
+	transition transform $containerTransition $kinetic, opacity 600ms ease
+	position relative
+	z-index 1
 	margin-top $headerSize
-	padding ($padding*2)
-	padding-bottom $headerSize
+	padding ($padding*1.5) $padding
 	// width 'calc(100% - %s)' % ($headerSize*2.8)
 	width 'calc(100% - %s)' % ($padding)
 	background-color $main-title-color
 	background-color var(--main-title-color)
 	min-height 'calc(100vh - %s)' % ($headerSize)
 	+above($md + 1)
-		padding-left (9rem + $padding*4)
+		padding-left (9rem + $padding*3)
+		height 'calc(100vh - %s)' % ($headerSize)
+		overflow-y scroll
 	h1, h2, .title
 		// color $main-text-color
 		// color var(--main-text-color)
@@ -145,6 +171,13 @@ a, a:hover, a:visited, a:focus
 	& > .row
 		// padding-left 12rem
 
+#page-content
+	transition opacity 300ms ease
+
 body.is-loading
-	#page-content
-		opacity 0
+	#container
+		transition transform ($containerTransition*1.5) $kinetic
+		transform translateY(100vh) translateZ(0)
+	&.menu-visible
+		#container
+			transform translateY(100vh) translateZ(0) translateX(-50vw)

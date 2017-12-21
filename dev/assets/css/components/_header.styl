@@ -4,26 +4,80 @@ header
 	left 0
 	height 6.8rem
 	width 100%
-	padding $padding
 	white-space nowrap
 	z-index 2
 	background-color $main-bg-color
 	background-color var(--main-bg-color)
-	a
-		display inline-flex
-		width 100%
-		justify-content space-between
+	display inline-flex
+	width 100%
+	justify-content space-between
+	z-index 20
+	[data-target=back]
+		transition opacity 0 linear
+		transition-delay 250ms
+		width 50%
+		padding $padding
+		&:hover
+			h2
+				display none
+			&::after
+				content 'Back'
+				color $main-title-color
+				color var(--main-title-color)
 	#site-title
-		order 1
-		+below($md)
-			display none
+		width 50%
+		padding $padding
+		text-align right
+		&:hover
+			h1
+				display none
+			&::after
+				content 'Menu'
+
+#main-menu
+	position fixed
+	top 0
+	right $padding
+	width "calc(100% - %s)" % ($padding)
+	color $main-title-color
+	color var(--main-title-color)
+	height 100%
+	transition visibility $containerTransition linear
+	visibility hidden
+	z-index 0
+	.title
+		padding $padding
+		padding-bottom ($padding*2)
+		text-align right
+		color $main-text-color
+		color var(--main-text-color)
+	#inner-menu
+		position relative
+		height "calc(100% - %s)" % ($headerSize + $padding)
+		overflow-y scroll
+		padding $padding
+		padding-left "calc(50% + %s)" % ($padding/2)
+		background $main-text-color
+		background var(--main-text-color)
+		ul
+			span(1)
+
+body.is-loading
+	header [data-target=back]
+		transition opacity ($containerTransition/2) ease
+		transition-delay 0
+		opacity 0
 
 body.menu-visible
-	nav#menu
-		transition transform $containerTransition $kinetic, color ($containerTransition/3) ($containerTransition/2) $kinetic
-		color $primary
-		transform translateZ(0)
-		ul
-			transform translateZ(0)
+	#main-menu
+		transition none
+		visibility visible
+	#site-title
+		h1
+			display none
+		&::after
+			content 'Fermer'
+	#container
+		transform translateX(-50vw) translateZ(0)
 	
 		

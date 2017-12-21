@@ -4,28 +4,80 @@
 {% extends "_layouts/default" %}
 
 {% block content %}
-		<h1>{{ entry.title }}</h1>
-		
-    <div id="page-description" class="row">{{ entry.body }}</div>
-    
-    {% if entry.socials|length %}
-      <div id="artist-socials" class="row">
-        {% for social in entry.socials %}
-          {% if social.url|length %}
-            <a href="{{social.url}}" target="_blank" rel="nofollow noopener">{{social.type}}</a>
-          {% endif %}
-        {% endfor %}
-      </div>
-    {% endif %}
 
-    {% if entry.embeds|length %}
-      <div id="page-embeds" class="row">
+		<div class="artist-page">
+
+    {% if entry %}
+
+    <div class="row">
+        <div class="featured-image">
+          {% for asset in entry.featuredImage %}
+            <img class="lazy lazyload" data-src="{{ asset.getUrl('header') }}" width="100%" height="100%" />
+            <noscript>
+              <img src="{{ asset.getUrl('header') }}" width="100%" height="100%" />
+            </noscript>
+          {% endfor %}
+        </div>
+        <div class="header-content">
+
+          <h1>{{entry.title}}</h1>
+
+          <div class="row mt2">
+            <div class="c2 fl">
+                <span class="lead">Labels</span>
+            </div>
+            </div>
+            <div class="c5 fl">
+              <div class="event-pratical lead">
+                {% if entry.tags is defined and entry.tags is not empty %}
+                <div class="event-pratical--style mt1">
+                  {% for style in entry.tags %}
+                    <span>{{style}}</span>
+                  {% endfor %}
+                </div>
+                {% endif %}      
+                {% if event.tarif is defined and event.tarif is not empty %}
+                <div class="event-pratical--price">
+                  {{event.tarif}}
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+
+    <div class="page-content">
+      
+      {% if entry.body is defined and entry.body is not empty %}
+      <section id="description" class="outline">
+        <h3 class="section-title">Informations</h3>
+        {{entry.body}}
+      </section>
+      {% endif %}
+
+      {% if entry.embeds is not empty %}
+      <section id="page-embeds">
         {% for asset in entry.embeds %}
           {% set embed = craft.embeddedAssets.fromAsset(asset) %}
           {% if embed %}
             <div class="embed-item">{{ embed.safeHtml|raw }}</div>
           {% endif %}
         {% endfor %}
-      </div>
+      </section>
     {% endif %}
+
+    </div>
+
+    {% else %}
+
+    <div class="page-content">
+      <p class="lead">Artiste introuvable</p>
+    </div>
+
+    {% endif %}
+
+</div>
+
 {% endblock %}

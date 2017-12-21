@@ -31,15 +31,25 @@
 
   </head>
 
-  <body page-type="{{ craft.request.getSegment(1) ?: 'home' }}">
+  <body class="" page-type="{{ craft.request.getSegment(1) ?: 'home' }}">
+
 
     <div id="wrapper">
+
+      <div id="main-menu">
+        <div class="title" event-target="menu">Fermer</div>
+        {{craft.olivemenus.getMenuHTML('menu',{ 'menu-id': 'inner-menu' })}}
+      </div>
 
       {% include "_partials/header.html" %}
 
       {# Page content #}
-      <div id="container">
-      {% block content %}{% endblock %}
+      <div id="container" page-type="{{ craft.request.getSegment(1) ?: 'home' }}">
+
+        <div id="page-content">
+          {% block content %}{% endblock %}
+        </div>
+      
       </div>
 
       {% include "_partials/footer.html" %}

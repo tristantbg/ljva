@@ -18,6 +18,7 @@ return array(
   "addTrailingSlashesToUrls"    => true,
   "postCpLoginRedirect"         => "entries",
   "siteUrl"                     => null,
+  "cpTrigger"                   => 'admin',
   "useEmailAsUsername"          => true,
   'maxUploadFileSize'           => 67108864,
   'enableCsrfProtection'        => true,

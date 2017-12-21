@@ -28,6 +28,13 @@
 	min-height "calc(100vh - %s)" % ($headerSize * 2)
 	.month
 		span(1)
+		// border-bottom 1px solid
+		&:not(:last-child)
+			// margin-bottom $headerSize
+			margin-bottom ($padding*2)
+		.month-date
+			+above($md + 1)
+				//margin-left -11rem
 	#events-items
 		display flex
 		justify-content stretch
@@ -35,9 +42,16 @@
 		.event-item
 			position relative
 			column(1/4, $gutter:($font-size), $cycle:4)
-			margin-bottom ($font-size*2)
+			margin-bottom ($font-size)
 			&:nth-child(4n)
 				padding-right 0
+				.inner
+					// border-right 1px solid
+			&:nth-last-child(-n+4)
+				margin-bottom 0
+				padding-bottom ($font-size)
+				+above($md + 1)
+					border-bottom 1px solid
 			+below($md)
 				column(1/2, $gutter:($font-size), $cycle:2)
 			+below($sm)
@@ -61,6 +75,7 @@
 				left 0
 				width 100%
 				height 100%
+				z-index 1
 			.event-infos
 				height 100%
 				display flex
@@ -75,16 +90,35 @@
 					flex 0 0 ($font-size*3)
 					+below($md)
 						flex 0 0 ($font-size*4)
+			// &:hover
+			// 	.event-image::after
+			// 		opacity 0
+			// 	.event-image img
+			// 		filter: none
 			.event-image
 				width 100%
 				padding-left ($font-size*3)
+				position relative
 				+below($md)
 					padding-left ($font-size*4)
+				// &::after
+				// 	transition opacity 100ms ease
+				// 	content ''
+				// 	position absolute
+				// 	top 0
+				// 	left 0
+				// 	width 100%
+				// 	height 100%
+				// 	background-color $main-bg-color
+				// 	background-color var(--main-bg-color)
+				// 	mix-blend-mode color
+				// 	pointer-events none
 				img
+					// transition filter 100ms ease
 					object-fit contain
 					object-position center left
+					// filter: grayscale(1)
 			.event-subheader
-				flex-grow 1
 				display flex
 				.event-calendar
 					flex 0 0 ($font-size*3)
@@ -94,5 +128,6 @@
 			.event-artists
 				padding-left ($font-size*3)
 				min-height 3em
+				flex-grow 1
 				+below($md)
 					padding-left ($font-size*4)

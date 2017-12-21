@@ -12,14 +12,15 @@ namespace = (target, name, block) ->
 namespace "App", (exports) ->
 
   # Example function
-  exports.hello = (subject = "world") ->
-    console.log "Hello, " + subject + "."
-    console.log($('header').text())
+  exports.interact = () ->
+    App.infiniteScrollEvents()
+    $('[event-target=menu]').click (e)->
+      $("body").toggleClass("menu-visible")
     return
 
   exports.infiniteScrollEvents = () ->
     events = document.querySelector("#events")
-    if typeof events isnt 'undefined'
+    if events
       nextURL = document.querySelector(".next-month").getAttribute("href")
       infScroll = new InfiniteScroll(events,
       path: () =>
@@ -30,7 +31,7 @@ namespace "App", (exports) ->
       responseType: 'document'
       outlayer: false
       scrollThreshold: 400
-      elementScroll: false
+      elementScroll: "#container"
       loadOnScroll: true
       history: undefined
       historyTitle: true
@@ -38,7 +39,7 @@ namespace "App", (exports) ->
       status: undefined
       button: undefined
       onInit: undefined
-      debug: true)
+      debug: false)
       infScroll.on 'load', (response, path) ->
         nextURL = response.querySelector(".next-month").getAttribute("href")
     return
@@ -47,8 +48,8 @@ namespace "App", (exports) ->
     options = 
       debug: false
       scroll: false
-      anchors: '[href]'
-      # loadingClass: 'is-loading'
+      anchors: '[href]:not([data-target=artist])'
+      loadingClass: false
       prefetch: true
       cacheLength: 4
       onBefore: (request, $container) ->
@@ -56,33 +57,34 @@ namespace "App", (exports) ->
         # console.log(popstate);
         return
       onStart:
-        duration: 0
+        duration: 400
         render: ($container) ->
           $("body").addClass 'is-loading'
           return
       onReady:
-        duration: 0
+        duration: 400
         render: ($container, $newContent) ->
           # Inject the new content
           $(window).scrollTop 0
-          # $body.attr 'page-type', $newContent.find('#page-content').attr('page-type')
+          # $("body").attr 'page-type', $newContent.find('#container').attr 'page-type'
           $container.html $newContent
-          # app.interact()
+          App.interact()
           return
       onAfter: ($container, $newContent) ->
         $("body").removeClass 'is-loading'
-        # setTimeout(function() {
+        setTimeout ->
+          $("body").removeClass 'menu-visible'
+        , 400
         # Clear cache for random content
         # smoothState.clear();
-        # }, 200);
         return
-    smoothState = $("#container").smoothState(options).data('smoothState')
+    smoothState = $("#wrapper").smoothState(options).data('smoothState')
     return
 
   # Initialization scripts
   (exports.init = ->
-    # App.smoothState
-    App.infiniteScrollEvents()
+    App.smoothState()
+    App.interact()
 
     return
   )()

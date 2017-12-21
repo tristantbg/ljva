@@ -1,0 +1,34 @@
+{% set mainTitle = entry.title %}
+{% set pageTitle = mainTitle %}
+
+{% extends "_layouts/default" %}
+
+{% block content %}
+
+<div class="content-with-featured">
+
+    {% if entry %}
+
+        <div class="featured-image">
+          {% for asset in entry.featuredImage %}
+            <img class="lazy lazyload" data-src="{{ asset.getUrl('header') }}" width="100%" height="100%" />
+            <noscript>
+              <img src="{{ asset.getUrl('header') }}" width="100%" height="100%" />
+            </noscript>
+          {% endfor %}
+        </div>
+
+        <div class="content">
+            {% if entry.body is defined and entry.body is not empty %}
+            <section id="description">
+              {{entry.body}}
+            </section>
+            {% endif %}
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+{% endblock %}
