@@ -24,8 +24,9 @@
 		display none
 
 #events
-	// margin-top ($padding)
-	min-height "calc(100vh - %s)" % ($headerSize * 2)
+	.page-load-status[style="display: none;"], .infinite-scroll-request[style="display: none;"]
+		display block !important
+		visibility hidden
 	.month
 		span(1)
 		// border-bottom 1px solid
@@ -85,11 +86,11 @@
 				margin-bottom 1em
 			.event-header
 				display flex
-				min-height 2em
+				min-height 3em
 				.event-day-num
 					flex 0 0 ($font-size*3)
 					+below($md)
-						flex 0 0 ($font-size*4)
+						flex 0 0 ($font-size*6)
 			// &:hover
 			// 	.event-image::after
 			// 		opacity 0
@@ -100,7 +101,7 @@
 				padding-left ($font-size*3)
 				position relative
 				+below($md)
-					padding-left ($font-size*4)
+					padding-left ($font-size*6)
 				// &::after
 				// 	transition opacity 100ms ease
 				// 	content ''
@@ -124,10 +125,10 @@
 					flex 0 0 ($font-size*3)
 					margin-top .3em
 					+below($md)
-						flex 0 0 ($font-size*4)
+						flex 0 0 ($font-size*6)
 			.event-artists
 				padding-left ($font-size*3)
 				min-height 3em
 				flex-grow 1
 				+below($md)
-					padding-left ($font-size*4)
+					padding-left ($font-size*6)

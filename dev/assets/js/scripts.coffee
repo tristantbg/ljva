@@ -14,8 +14,18 @@ namespace "App", (exports) ->
   # Example function
   exports.interact = () ->
     App.infiniteScrollEvents()
+    $('body.with-intro').click (e)->
+      $("body").addClass("animate")
+      setTimeout ->
+        $("body").removeClass 'with-intro animate'
+        $("#intro").remove()
+      , 700
     $('[event-target=menu]').click (e)->
       $("body").toggleClass("menu-visible")
+    $('[data-image]').on 'mouseenter', (e) =>
+      $(".featured-image").append("<img class='lazy lazyload' data-src='"+e.target.getAttribute("data-image")+"'>")
+    $('[data-image]').on 'mouseleave', (e) =>
+      $(".featured-image")[0].innerHTML = ""
     return
 
   exports.infiniteScrollEvents = () ->
@@ -30,13 +40,13 @@ namespace "App", (exports) ->
       prefill: true
       responseType: 'document'
       outlayer: false
-      scrollThreshold: 400
+      scrollThreshold: 200
       elementScroll: "#container"
       loadOnScroll: true
       history: undefined
       historyTitle: true
       hideNav: "#event-pagination"
-      status: undefined
+      status: '.page-load-status'
       button: undefined
       onInit: undefined
       debug: false)
@@ -50,7 +60,7 @@ namespace "App", (exports) ->
       scroll: false
       anchors: '[href]:not([data-target=artist])'
       loadingClass: false
-      prefetch: true
+      prefetch: false
       cacheLength: 4
       onBefore: (request, $container) ->
         # popstate = request.url.replace(/\/$/, '').replace(window.location.origin + $root, '');
@@ -83,8 +93,10 @@ namespace "App", (exports) ->
 
   # Initialization scripts
   (exports.init = ->
-    App.smoothState()
-    App.interact()
+    window.viewportUnitsBuggyfill.init()
+    $(document).ready () ->
+      App.smoothState()
+      App.interact()
 
     return
   )()

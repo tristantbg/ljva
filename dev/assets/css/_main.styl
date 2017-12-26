@@ -6,6 +6,7 @@ global-reset()
 	--main-bg-color $main-bg-color
 	--main-title-color $main-title-color
 	--main-text-color $main-text-color
+	--main-panel-color $main-panel-color
 
 *
 	//hideselect()
@@ -23,7 +24,7 @@ body,html
 html
 	font-size 10px
 	+below($sm)
-		font-size 1.8vmin
+		font-size 1.7vmin
 
 body
 	font-family 'F', Helvetica Neue, Arial, sans-serif
@@ -34,7 +35,7 @@ body
 	color $main-text-color
 	color var(--main-text-color)
 	+below($sm)
-		font-size ($font-size*1.5)
+		font-size ($font-size*2)
 
 p
 	margin-bottom 1em
@@ -59,11 +60,6 @@ h4
 
 h3, .section-title
 	text-transform uppercase
-	&:not(:last-child)
-		margin-bottom ($padding*2)
-
-section:not(:last-child)
-	margin-bottom $headerSize
 
 section.outline
 	position relative
@@ -80,6 +76,8 @@ section.outline
 
 .lead
 	text-transform uppercase
+	strong
+		text-decoration underline
 
 .small, #main-menu
 	text-transform uppercase
@@ -101,11 +99,17 @@ section.outline
 		border-color $main-text-color
 		border-color var(--main-text-color)
 
-// ::selection
-// 	background alpha($main-text-color, 0.2)
+::selection
+	background $main-text-color
+	background var(--main-text-color)
+	color $main-title-color
+	color var(--main-title-color)
 	
-// ::-moz-selection
-// 	background alpha($main-text-color, 0.2)
+::-moz-selection
+	background $main-text-color
+	background var(--main-text-color)
+	color $main-title-color
+	color var(--main-title-color)
 
 video::-webkit-media-controls
 	display none
@@ -126,7 +130,7 @@ a, a:hover, a:visited, a:focus
 	cursor pointer
 
 .lazy, .plyr
-	transition opacity 150ms ease
+	transition opacity 100ms ease
 	opacity 0
 
 .lazy.lazyloaded, .lazy.flickity-lazyloaded, .plyr.plyr--ready
@@ -135,20 +139,30 @@ a, a:hover, a:visited, a:focus
 [event-target]
 	cursor pointer
 
+.mobile
+	+above($md + 1)
+		display none !important
+
 .row
 	span(1)
 
 #main
 	span(1)
+
+#wrapper, header, #container
+	backface-visibility hidden
+	-webkit-backface-visibility hidden
 	
 #wrapper
 	span(1)
+	position relative
+	z-index 4
 
 #container
 	span(1)
 	transition transform $containerTransition $kinetic, opacity 600ms ease
 	position relative
-	z-index 1
+	z-index 5
 	margin-top $headerSize
 	padding ($padding*1.5) $padding
 	// width 'calc(100% - %s)' % ($headerSize*2.8)
@@ -156,28 +170,59 @@ a, a:hover, a:visited, a:focus
 	background-color $main-title-color
 	background-color var(--main-title-color)
 	min-height 'calc(100vh - %s)' % ($headerSize)
+	+below($md)
+		//padding-bottom 22rem
 	+above($md + 1)
-		padding-left (9rem + $padding*3)
 		height 'calc(100vh - %s)' % ($headerSize)
 		overflow-y scroll
 	h1, h2, .title
-		// color $main-text-color
-		// color var(--main-text-color)
+		color $main-text-color
+		color var(--main-text-color)
+		// color $main-bg-color
+		// color var(--main-bg-color)
+		// svg
+		// 	fill $main-bg-color
+		// 	fill var(--main-bg-color)
+	a:hover
 		color $main-bg-color
 		color var(--main-bg-color)
-		svg
-			fill $main-bg-color
-			fill var(--main-bg-color)
-	& > .row
-		// padding-left 12rem
 
 #page-content
-	transition opacity 300ms ease
+	span(1)
+
+body.with-intro
+	overflow hidden
+	header
+		transform "translateY(calc(100vh - %s)) translateZ(0)" % ($headerSize)
+	#main-menu, #container
+		opacity 0
+	#wrapper
+		margin-top 100vh
+		background-color $main-bg-color
+		background-color var(--main-bg-color)
+	#java-card
+		bottom -21rem
+	&.animate
+		header
+			transition transform ($containerTransition*2) $kinetic
+			transform none
+		#container
+			opacity 1
+		#wrapper
+			transition margin-top ($containerTransition*2) $kinetic
+			margin-top 0
+		#java-card
+			transition bottom ($containerTransition*2) $kinetic
+			bottom 0
 
 body.is-loading
 	#container
-		transition transform ($containerTransition*1.5) $kinetic
-		transform translateY(100vh) translateZ(0)
+		+above($md + 1)
+			transition transform ($containerTransition*1.5) $kinetic
+			transform translateY(100vh) translateZ(0)
 	&.menu-visible
 		#container
-			transform translateY(100vh) translateZ(0) translateX(-50vw)
+			+above($md + 1)
+				transform "translateY(100vh) translateX(calc(-50% + %s)) translateZ(0)" % $padding
+			// +below($md)
+			// 	transform translateY(100vh) translateZ(0) translateX(-100vw)

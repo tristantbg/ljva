@@ -1,0 +1,189 @@
+{% if entry.elementType is not defined %}
+  {% set isEvent = true %}
+{% else %}
+  {% set isEvent = false %}
+{% endif %}
+
+<div class="featured-image">
+  {% for asset in entry.featuredImage %}
+    <img class="lazy lazyload" data-src="{{ asset.getUrl('header') }}" width="100%" height="100%" />
+    <noscript>
+      <img src="{{ asset.getUrl('header') }}" width="100%" height="100%" />
+    </noscript>
+  {% endfor %}
+</div>
+
+<div class="content">
+
+  <div class="header-content">
+
+    <div class="row py-half">
+      <h1>{{entry.title}}</h1>
+    </div>
+    
+    {% if isEvent %}
+    <div class="row">
+      <div class="c2 fl" md="c3">
+        <div class="event-calendar">
+          <a href="{{ siteUrl }}programmation/month/calendar/{{ entry.calendar.handle }}">
+            <span class="button lead">{{entry.calendar.name}}</span>
+          </a>  
+        </div>
+      </div>
+      <div class="c5 fl">
+        <div class="event-pratical lead">
+          <div class="event-pratical--time">
+            {% include "programmation/partials/formatted_date" %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if entry.tarif is defined and entry.tarif is not empty %}
+       <div class="row">
+          <div class="c2 fl" md="c3">
+              <h4>Tarif</h4>
+          </div>
+          <div class="c5 fl">
+            {{entry.tarif}}
+          </div>
+        </div>
+    {% endif %}
+    {% if entry.style is defined and entry.style is not empty %}
+        <div class="row">
+          <div class="c2 fl" md="c3">
+              <h4>Style</h4>
+          </div>
+          <div class="c5 fl">
+            {% for style in entry.style %}
+              <h4>{{style|raw}}</h4>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% else %}
+      {% if entry.style is defined and entry.style is not empty %}
+        <div class="row">
+          <div class="c2 fl" md="c3">
+              <h4>Style</h4>
+          </div>
+          <div class="c5 fl">
+            {% for style in entry.style %}
+              <h4>{{style}}</h4>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+      {% if entry.labels is defined and entry.labels is not empty %}
+        <div class="row">
+          <div class="c2 fl" md="c3">
+              <h4>Labels</h4>
+          </div>
+          <div class="c5 fl">
+            {% for label in entry.labels %}
+              <h4>{{label}}</h4>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+      {% if entry.socials is defined and entry.socials is not empty %}
+        {% set hasSocials = false %}
+        {% for social in entry.socials %}
+          {% if social.url is not empty %}
+            {% set hasSocials = true %}
+          {% endif %}
+        {% endfor %}
+        {% if hasSocials %}
+        <div class="row">
+          <div class="c2 fl" md="dn">
+              &nbsp;
+          </div>
+          <div class="c5 fl" md="c12">
+            {% for social in entry.socials %}
+              {% if social.url is not empty %}
+                <h4><a href="{{social.url}}" target="_blank" rel="nofollow noopener">{{social.type}}</a></h4>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      {% endif %}
+    {% endif %}
+
+    {% if entry.artists is defined and entry.artists is not empty %}
+      <section class="row">
+        <div class="c2 fl" md="c3 op0">
+          <h4 class="align-top">Artistes</h4>
+        </div>
+        <div class="c10 fl" md="c7">
+          <div class="event-artists lead event-infos--item">
+            {% for artist in entry.artists %}
+              <div class="row title"><a href="{{artist.url}}" data-target="artiste">{{artist.title}}</a></div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    {% if entry.organisateurs is defined and entry.organisateurs is not empty %}
+      <section class="row">
+        <div class="c2 fl" md="c3">
+          <h4 class="align-top">Orgas</h4>
+        </div>
+        <div class="c10 fl" md="c7">
+          <div class="event-artists lead event-infos--item">
+            {% for organisateur in entry.organisateurs %}
+              <div class="row title"><a href="{{organisateur.url}}" data-target="artiste">{{organisateur.title}}</a></div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+  </div>
+
+<!-- section#.row>div.c2.fl.lead+div.c10.fl -->
+
+  <div class="page-content">
+    
+    {% if entry.body is defined and entry.body is not empty %}
+    <section id="infos" class="row">
+      <div class="c2 fl" md="c12 mb1">
+        <h4>Infos</h4>
+      </div>
+      <div class="c10 fl" md="c12">{{entry.body}}</div>
+    </section>
+    {% endif %}
+
+    {% if false and entry.embeds is defined and entry.embeds is not empty %}
+    <section id="page-embeds" class="row">
+      {% for asset in entry.embeds %}
+        {% set embed = craft.embeddedAssets.fromAsset(asset) %}
+        {% if embed %}
+          <div class="embed-item">{{ embed.safeHtml|raw }}</div>
+        {% endif %}
+      {% endfor %}
+    </section>
+    {% endif %}
+
+  {% if entry.billetterie is defined and entry.billetterie|length %}
+    <section id="billetterie" class="row">
+      <div class="c2 fl" md="c12 mb1">
+        <h4>Participer</h4>
+      </div>
+      <div class="c10 fl" md="c12">
+        {% for ticket in entry.billetterie %}
+          {% if ticket.type == "eventFacebook" %}
+            <a href="{{ticket.eventFacebookUrl}}" target="_blank" rel="nofollow noopener"><h3>Event Facebook</h3></a>
+          {% elseif ticket.type == "yurplan" %}
+            <a href="{{ticket.yurplanUrl}}" target="_blank" rel="nofollow noopener"><h3>Yurplan</h3></a>
+          {% elseif ticket.type == "digitick" %}
+            <a href="{{ticket.digitickUrl}}" target="_blank" rel="nofollow noopener"><h3>Digitick</h3></a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  </div>
+
+</div>

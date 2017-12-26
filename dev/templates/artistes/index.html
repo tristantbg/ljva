@@ -3,9 +3,21 @@
 {% extends "_layouts/default.html" %}
 
 {% block content %}
-		<div id="artists" class="row">
-  {% for artist in craft.entries.section('artistes').order("title").find() %}
-			<h2><a href="{{ artist.url }}">{{ artist.title }}</a></h2>
-  {% endfor %}
-		</div>
+  <div class="content-with-featured artists">
+    <div class="featured-image">
+    </div>
+    <div class="content">
+    		<ul id="artists" class="row">
+      {% for artist in craft.entries.section('artistes').order("title").find() %}
+    			<li class="title">
+            <a href="{{ artist.url }}" 
+            {% if artist.featuredImage and artist.featuredImage is not empty %}
+            data-image="{{ artist.featuredImage.first.getUrl('header') }}"
+            {% endif %}
+            >{{ artist.title }}</a>
+          </li>
+      {% endfor %}
+    		</ul>
+    </div>
+  </div>
 {% endblock %}

@@ -1,0 +1,14 @@
+<meta content="{{ entry.title }}" name="DC.title"/>
+<meta content="{{ entry.title }}" property="og:title"/>
+
+{% if craft.request.getSegment(1) is defined %}
+<meta content="{{ entry.body|striptags('<strong><em><br>')|raw }}" name="description"/>
+<meta content="{{ entry.body|striptags('<strong><em><br>')|raw }}" name="DC.description"/>
+<meta content="{{ entry.body|striptags('<strong><em><br>')|raw }}" property="og:description"/>
+{% endif %}
+
+{% if entry.featuredImage is defined and entry.featuredImage.first %}
+    <meta content="{{ entry.featuredImage.first.url }}" property="og:image"/>
+    <meta content="{{ entry.featuredImage.first.url }}" property="twitter:image"/>
+    <meta content="{{ entry.featuredImage.first.url }}" property="twitter:image:src"/>
+{% endif %}

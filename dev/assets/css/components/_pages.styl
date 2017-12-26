@@ -1,24 +1,84 @@
 .content-with-featured
 	span(1)
 	.featured-image
-		span(4/12)
-		min-height 1px
+		span(5/10)
+		width 49vw
+		&.empty
+			+below($md)
+				display none
+		+below($md)
+			stack()
+			margin-bottom ($padding*2)
+		+above($md + 1)
+			height "calc(100vh - %s)" % ($headerSize + $padding)
+			// margin-left (-1*$padding)
+			// width 40vw
+			position fixed
+			// background $main-panel-color
+			// background var(--main-panel-color)
+			padding 1px ($javaCard/2) ($javaCard/2) ($javaCard)
 		img
 			width 100%
+			+above($md + 1)
+				height 100%
+				object-fit contain
+				object-position top left
+		// .lazy
+		// 	transition transform 600ms $kinetic
+		// 	// transition-delay $containerTransition
+		// 	transform translateX(-50vw) translateZ(0)
+		// 	&.lazyloaded
+		// 		transform none
 	.content
-		span(8/12)
-		padding-left ($padding*2)
-		padding-right ($heading*3)
+		+below($md)
+			stack()
+		+above($md + 1)
+			// span(5/10, $offset: 5/10)
+			span(1)
 		p
 			line-height 1.4
 			&:not(:last-child)
 				margin-bottom 1em
-	.header-content
+	.header-content, .page-content
 		span(1)
-		&:not(:last-child)
-			margin-bottom ($headerSize*2)
+		& > .row
+			border-bottom 1px solid
+			padding $padding 0
+			+above($md + 1)
+				padding-left 50%
+			&.py-half
+				padding-top ($padding/2)
+				padding-bottom ($padding/2)
+			h4.align-top
+				margin-top .2em
+		&:first-child
+			border-top 1px solid
 		.event-calendar
 			margin-top .3em
 		.event-artists .title
 			color $main-text-color !important
 			color var(--main-text-color) !important
+
+.content-offset
+	+above($md + 1)
+		padding-left (9rem + $padding*3)
+
+ul#artists
+	li
+		padding ($padding/2) 0
+		padding-left 50%
+		border-bottom 1px solid
+		&:first-child
+			border-top 1px solid
+
+.indent-headings
+	h3
+		span(1)
+	h4
+		span(2/10)
+	h4 + p
+		span(8/10)
+
+.default-page
+	h3:not(:first-child)
+		margin-top 1em

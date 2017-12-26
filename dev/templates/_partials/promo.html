@@ -1,0 +1,27 @@
+{% if entry.promoText is defined and entry.promoText is not empty %}
+<div id="promo" class="fl c12 row mb2">
+  <div class="c4 fl" md="c12" style="min-height: 1px;">
+    {% for asset in entry.featuredImage %}
+      {% if entry.promoLink is defined and entry.promoLink is not empty %}
+        {% for button in entry.promoLink %}
+        <a href="{{button.url}}" target="_blank" rel="noreferrer noopener">
+        {% endfor %}
+      {% endif %}
+      <img class="lazy lazyload" data-src="{{ asset.getUrl('header') }}" width="100%" />
+      {% if entry.promoLink is defined and entry.promoLink is not empty %}
+        {% for button in entry.promoLink %}
+        </a>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="co2 c6 fl" md="c12 co0 my2">
+    <span class="title">{{entry.promoText}}</span>
+    {% if entry.promoLink is defined and entry.promoLink is not empty %}
+    {% for button in entry.promoLink %}
+    <div class="mt2"><a class="title button" href="{{button.url}}" target="_blank" rel="noreferrer noopener">{{button.text}}</a></div>
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+{% endif %}

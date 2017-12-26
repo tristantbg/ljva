@@ -1,0 +1,22 @@
+{% cache %}
+
+<title>{% if pageTitle is defined %}{{ pageTitle }} | {% endif %}{{ siteName }}</title>
+<meta charset="utf-8" />
+<meta content="{{ siteName }}" property="og:site_name"/>
+{% if pageTitle is not defined %}
+<meta content="{{ metadata.metaDescription|striptags('<strong><em><br>')|raw }}" name="description"/>
+<meta content="{{ metadata.metaDescription|striptags('<strong><em><br>')|raw }}" name="DC.description"/>
+<meta content="{{ metadata.metaDescription|striptags('<strong><em><br>')|raw }}" property="og:description"/>
+{% endif %}
+
+<link rel="home" href="{{ siteUrl }}" />
+<link href="{{ craft.request.getUrl() }}" rel="canonical"></link>
+<meta content="{{ craft.request.getUrl() }}" property="og:url"/>
+
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+<meta content="on" http-equiv="cleartype"/>
+<meta content="True" name="HandheldFriendly"/>
+<meta content="320" name="MobileOptimized"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+{% endcache %}

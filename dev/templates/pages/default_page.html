@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<div class="content-with-featured">
+<div class="content-with-featured default-page">
 
     {% if entry %}
 
@@ -19,11 +19,31 @@
         </div>
 
         <div class="content">
-            {% if entry.body is defined and entry.body is not empty %}
-            <section id="description">
-              {{entry.body}}
-            </section>
-            {% endif %}
+            <div class="page-content">
+              {% if entry.body is defined and entry.body is not empty %}
+              <section id="description" class="row dn">
+                {{entry.body}}
+              </section>
+              {% endif %}
+              {% if entry.sections is defined and entry.sections is not empty %}
+                {% for section in entry.sections %}
+                <section class="row" section-type="{{section.type}}">
+                  {% if section.type == "texte" %}
+                    {{section.texte}}
+                  {% elseif section.type == "titreTexte" %}
+                    <div class="c2 fl" md="c12 mb1">
+                      <h4>{{section.titre}}</h4>
+                    </div>
+                    <div class="c10 fl lead" md="c12">
+                      {{section.texte}}
+                    </div>
+                  {% else %}
+                    Erreur
+                  {% endif %}
+                </section>
+                {% endfor %}
+              {% endif %}
+            </div>
         </div>
 
     {% endif %}

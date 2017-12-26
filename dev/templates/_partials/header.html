@@ -1,5 +1,6 @@
 <header>
-  <a href="{{ siteUrl }}" data-target="back">
+  <a href="{{ siteUrl }}" id="current-page">
+  <!-- <div id="current-page"> -->
     {% if mainTitle is defined %}
         {% if mainTitle == "Programmation" %}
           <h2>{{mainTitle}}</h2>
@@ -7,6 +8,7 @@
         <h2>{{mainTitle}}</h2>
         {% endif %}
     {% endif %}
+  <!-- </div> -->
   </a>
   <div id="site-title" event-target="menu"><h1>{{siteName}}</h1></div>
 </header>

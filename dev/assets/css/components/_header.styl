@@ -12,16 +12,18 @@ header
 	width 100%
 	justify-content space-between
 	z-index 20
+	#current-page
+		width 50%
+		padding $padding
+		cursor default
 	[data-target=back]
 		transition opacity 0 linear
 		transition-delay 250ms
-		width 50%
-		padding $padding
 		&:hover
 			h2
 				display none
 			&::after
-				content 'Back'
+				content 'Retour'
 				color $main-title-color
 				color var(--main-title-color)
 	#site-title
@@ -38,29 +40,39 @@ header
 	position fixed
 	top 0
 	right $padding
-	width "calc(100% - %s)" % ($padding)
-	color $main-title-color
-	color var(--main-title-color)
+	width "calc(50% - %s)" % $padding
 	height 100%
 	transition visibility $containerTransition linear
 	visibility hidden
-	z-index 0
+	z-index -1
+	+below($md)
+		width "calc(100% - %s)" % $padding
 	.title
 		padding $padding
-		padding-bottom ($padding*2)
+		padding-bottom ($padding+0.1)
 		text-align right
-		color $main-text-color
-		color var(--main-text-color)
 	#inner-menu
 		position relative
-		height "calc(100% - %s)" % ($headerSize + $padding)
+		height "calc(100% - %s)" % ($headerSize)
 		overflow-y scroll
-		padding $padding
-		padding-left "calc(50% + %s)" % ($padding/2)
-		background $main-text-color
-		background var(--main-text-color)
+		padding $padding 0 $padding $padding
+		// background $main-text-color
+		// background var(--main-text-color)
 		ul
 			span(1)
+			li
+				& > a
+					display block
+					padding ($padding/2) 0
+					border-bottom 1px solid $main-text-color
+					border-bottom 1px solid var(--main-text-color)
+				&:first-child
+					& > a
+						border-top 1px solid $main-text-color
+						border-top 1px solid var(--main-text-color)
+				a:hover
+					color $main-title-color
+					color var(--main-title-color)
 
 body.is-loading
 	header [data-target=back]
@@ -78,6 +90,9 @@ body.menu-visible
 		&::after
 			content 'Fermer'
 	#container
-		transform translateX(-50vw) translateZ(0)
+		+above($md + 1)
+			transform "translateX(calc(-50% + %s)) translateZ(0)" % $padding
+		+below($md)
+			transform translateX(-100vw) translateZ(0)
 	
 		

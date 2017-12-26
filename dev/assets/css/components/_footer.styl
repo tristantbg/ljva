@@ -1,6 +1,6 @@
 #java-card
 	span(6/12)
-	height 20rem
+	height 21rem
 	position fixed
 	bottom 0
 	left 0
@@ -11,9 +11,11 @@
 	transform 'translateX(calc(-100% + 9rem + %s)) translateZ(0)' % ($padding*2)
 	background-color $main-bg-color
 	background-color var(--main-bg-color)
-	z-index 20
-	&:hover
-		transform none
+	z-index 10
+	+below($md)
+		display none
+	// &:hover
+	// 	transform none
 	#credits
 		flex 1 1 auto
 		padding-right $padding
@@ -25,5 +27,6 @@
 		a#logo
 			padding 0.5rem 1rem 0 0
 			svg
+				width 100%
 				fill $main-text-color
 				fill var(--main-text-color)

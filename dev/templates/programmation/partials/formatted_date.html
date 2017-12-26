@@ -1,0 +1,30 @@
+<div>{% if entry.multiDay %}Du {% endif %}{{entry.startDate.format('j F Y')}}</div>
+{% if entry.allDay %}
+    Toute la journée
+{% else %}
+    {% if entry.startDate.format("i") != '00' %}
+      {{ entry.startDate.format("H:i") }}
+    {% else %}
+      {{ entry.startDate.format("H") }}H
+    {% endif %}
+    {% if entry.noEnd %}
+     - Aube
+    {% else %}
+      {% if entry.multiDay %}
+          <div>Au {{ entry.endDate.format("j M Y") }}</div>
+          <div>
+            {% if entry.endDate.format("i") != '00' %}
+              {{ entry.endDate.format("H:i") }}
+            {% else %}
+              {{ entry.endDate.format("H") }}H
+            {% endif %}
+          </div>
+      {% else %}
+          {% if entry.endDate.format("i") != '00' %}
+             - {{ entry.endDate.format("H:i") }}
+          {% else %}
+             - {{ entry.endDate.format("H") }}H
+          {% endif %}
+      {% endif %}
+    {% endif %}
+{% endif %}

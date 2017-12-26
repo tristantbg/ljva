@@ -13,12 +13,22 @@
   </div>
 
   <div class="event-image event-infos--item">
-    {% for asset in event.featuredImage %}
-      <img class="lazy lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ asset.getUrl('squareThumb') }}" width="100%" height="100%" />
+
+    {% if event.thumbImage is defined and event.thumbImage.first is not empty %}
+      {% set asset = event.thumbImage.first.getUrl('squareThumb') %}
+    {% elseif event.featuredImage is defined and event.featuredImage.first is not empty %}
+      {% set asset = event.featuredImage.first.getUrl('squareThumb') %}
+    {% else %}
+      {% set asset = null %}
+    {% endif %}
+
+    {% if asset is defined %}
+      <img class="lazy lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ asset }}" width="100%" height="100%" />
       <noscript>
-        <img src="{{ asset.getUrl('squareThumb') }}" width="100%" height="100%" />
+        <img src="{{ asset }}" width="100%" height="100%" />
       </noscript>
-    {% endfor %}
+    {% endif %}
+
   </div>   
   
   <div class="event-subheader small event-infos--item">

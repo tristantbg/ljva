@@ -34,6 +34,7 @@
     "lazysizes": "^4.0.1",
     "rupture": "^0.7.1",
     "smoothstate": "^0.7.2",
-    "stylus": "^0.54.5"
+    "stylus": "^0.54.5",
+    "viewport-units-buggyfill": "^0.6.2"
   }
 }

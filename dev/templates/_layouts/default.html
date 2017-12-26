@@ -3,15 +3,14 @@
 
   <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>
-      {% if pageTitle is defined %}{{ pageTitle }} | {% endif %}
-      {{ siteName }}
-    </title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "_partials/_head" %}
+    {% block seo %}
+      {% if entry is defined %}
+          {% include "_partials/_seo" with {'entry' : entry } %}
+      {% elseif category is defined %}
+          {% include "_partials/_seo" with {'entry' : category } %}
+      {% endif %}
+    {% endblock %}
 
     {# Global styles #}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4=" crossorigin="anonymous"></script>
@@ -31,8 +30,8 @@
 
   </head>
 
-  <body class="" page-type="{{ craft.request.getSegment(1) ?: 'home' }}">
-
+  <body class="with-intro" page-type="{{ craft.request.getSegment(1) ?: 'home' }}">
+    {% include "_partials/intro" %}
 
     <div id="wrapper">
 
@@ -41,7 +40,7 @@
         {{craft.olivemenus.getMenuHTML('menu',{ 'menu-id': 'inner-menu' })}}
       </div>
 
-      {% include "_partials/header.html" %}
+      {% include "_partials/header" %}
 
       {# Page content #}
       <div id="container" page-type="{{ craft.request.getSegment(1) ?: 'home' }}">
@@ -52,7 +51,7 @@
       
       </div>
 
-      {% include "_partials/footer.html" %}
+      {% include "_partials/footer" %}
 
     </div>
 
