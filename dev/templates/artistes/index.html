@@ -14,7 +14,7 @@
             {% if artist.featuredImage and artist.featuredImage is not empty %}
             data-image="{{ artist.featuredImage.first.getUrl('header') }}"
             {% endif %}
-            >{{ artist.title }}</a>
+            data-target="artiste">{{ artist.title }}</a>
           </li>
       {% endfor %}
     		</ul>

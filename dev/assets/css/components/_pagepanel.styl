@@ -1,50 +1,101 @@
+.in-panel
+	display none
+	
 #page-panel
 	transition transform $containerTransition $kinetic
 	position fixed
-	top 0
-	right 0
-	width 50%
-	height 100%
-	padding $padding
-	background $secondary
-	color $primary
-	transform translateX(100%) translateZ(0)
+	bottom 0
+	right 100%
+	width "calc(50% - %s)" % ($padding*2)
+	height "calc(100% - %s)" % ($headerSize+$padding+0.5)
+	padding ($padding/2) $padding ($javaCard+$padding)
+	background $main-panel-color
+	background var(--main-panel-color)
+	color $main-title-color
+	color var(--main-title-color)
 	overflow-y scroll
 	scroll-behavior smooth
 	-webkit-overflow-scrolling touch
 	z-index 10
 	+below($md)
-		width 90%
-	.project-header, .project-infos
-		margin-bottom 1em
-		span, p
-			display inline
-	.additional-infos
-		margin-bottom 1em
-	.project-medias
-		.project-media:not(:last-child)
-			margin-bottom 1em
-		img
-			display block
-		.lazy:not(.lazyloaded) + .caption
-			opacity 0
-		.caption
-			margin-top 1em
+		width "calc(100% - %s)" % ($padding*2)
+	.title a
+		color $main-title-color !important
+		color var(--main-title-color) !important
+	.in-panel
+		display block
+	.not-in-panel
+		display none
+	.content-with-featured
+		.in-panel > h1
+			margin-bottom ($padding/2)
+			padding-right ($font-size*2)
+		.featured-image
+			span(1)
+			position initial
+			height auto
+			padding ($padding/2) 0 $padding (9rem+$padding*2)
+			&.empty
+				display none
+			img
+				width 100%
+				height auto
+				max-height ($headerSize*6+3.5)
+				object-position top left
+		.header-content, .page-content
+			span(1)
+			& > .row
+				border none
+				padding $padding 0
+				+above($md + 1)
+					padding-left 0
+				&.py-half
+					padding-top ($padding/2)
+					padding-bottom ($padding/2)
+				h4.align-top
+					margin-top .2em
+				.c2
+					width (9rem + $padding*2)
+				.c5, .c8, .c10
+					width 'calc(100% - %s)' % (9rem + $padding*2)
+			&:first-child
+				border-top 1px solid
+			.event-calendar
+				margin-top .3em
+			.event-artists .title
+				color $main-text-color !important
+				color var(--main-text-color) !important
+		.content-offset
+			padding-left 0
 	
 #page-panel-close
-	cursor url('../../images/close-b.png') 8 8, default
-	position fixed
-	height 100%
-	width 50%
-	top 0
-	left 0
+	position absolute
+	top ($padding/2)
+	right ($padding/2)
+	width ($font-size*2)
+	height ($font-size*2)
 	z-index 10
-	display none
+	cursor pointer
+	&::before, &::after
+		content ''
+		position absolute
+		top 50%
+		width 100%
+		height 1px
+		background $main-title-color
+		background var(--main-title-color)
+		transform-origin center
+	&::before
+		transform rotate(45deg)
+	&::after
+		transform rotate(-45deg)
+	// display none
 
 body.page-panel
-	header, #container
-		transform translateX(-50vw) translateZ(0)
+	overflow hidden
+	#page-content
+		opacity 1
 	#page-panel
-		transform translateZ(0)
+		transform translateX(100%) translateZ(0)
 	#page-panel-close
 		display block

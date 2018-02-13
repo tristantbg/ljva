@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="fr">
 
   <head>
 
@@ -14,7 +14,7 @@
 
     {# Global styles #}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="{{ craft.config.tmpl.css }}/styles.css">
+    <link rel="stylesheet" type="text/css" href="{{ craft.config.tmpl.css }}/styles.css?=v2.1.1">
 
     {# Page-specific styles (if they exist) #}
     {% block page_styles %}{% endblock %}
@@ -55,7 +55,7 @@
 
     </div>
 
-    <script src="{{ craft.config.tmpl.js }}/scripts.min.js"></script>
+    <script src="{{ craft.config.tmpl.js }}/scripts.min.js?=v2.1.1"></script>
 
     {% block page_script_tags %}{% endblock %}
 

@@ -31,9 +31,11 @@
 
 {% if calendarHandle != null %}
   {% set mainTitle = "Programme #{calendarHandle|capitalize}" %}
+  {% set scrollTitle = mainTitle %}
   {% set pageTitle = mainTitle %}
 {% else %}
   {% set mainTitle = "Programmation" %}
+  {% set scrollTitle = mainTitle %}
   {% set pageTitle = mainTitle %}
 {% endif %}
 {% set page = "month" %}

@@ -160,7 +160,8 @@ a, a:hover, a:visited, a:focus
 
 #container
 	span(1)
-	transition transform $containerTransition $kinetic, opacity 600ms ease
+	transition transform $containerTransition $kinetic
+	visibility visible
 	position relative
 	z-index 5
 	margin-top $headerSize
@@ -173,8 +174,8 @@ a, a:hover, a:visited, a:focus
 	+below($md)
 		//padding-bottom 22rem
 	+above($md + 1)
-		height 'calc(100vh - %s)' % ($headerSize)
-		overflow-y scroll
+		// height 'calc(100vh - %s)' % ($headerSize)
+		// overflow-y scroll
 	h1, h2, .title
 		color $main-text-color
 		color var(--main-text-color)
@@ -189,40 +190,48 @@ a, a:hover, a:visited, a:focus
 
 #page-content
 	span(1)
+	transition opacity 200ms ease
 
-body.with-intro
-	overflow hidden
-	header
-		transform "translateY(calc(100vh - %s)) translateZ(0)" % ($headerSize)
-	#main-menu, #container
-		opacity 0
-	#wrapper
-		margin-top 100vh
-		background-color $main-bg-color
-		background-color var(--main-bg-color)
-	#java-card
-		bottom -21rem
-	&.animate
++above($md + 1)
+	body.with-intro
+		overflow hidden
 		header
-			transition transform ($containerTransition*2) $kinetic
-			transform none
-		#container
-			opacity 1
+			transform "translateY(calc(100vh - %s)) translateZ(0)" % ($headerSize)
+		#page-panel
+			display none
+		#main-menu, #container
+			visibility hidden
+			opacity 0
 		#wrapper
-			transition margin-top ($containerTransition*2) $kinetic
-			margin-top 0
+			margin-top 100vh
+			background-color $main-bg-color
+			background-color var(--main-bg-color)
 		#java-card
-			transition bottom ($containerTransition*2) $kinetic
-			bottom 0
+			bottom -21rem
+		&.animate
+			header
+				transition transform ($containerTransition*2) $kinetic
+				transform none
+			#container
+				opacity 1
+				visibility visible
+			#wrapper
+				transition margin-top ($containerTransition*2) $kinetic
+				margin-top 0
+			#java-card
+				transition bottom ($containerTransition*2) $kinetic
+				bottom 0
 
 body.is-loading
+	#page-content
+		opacity 0
 	#container
 		+above($md + 1)
-			transition transform ($containerTransition*1.5) $kinetic
-			transform translateY(100vh) translateZ(0)
+			// transition transform ($containerTransition*1.5) $kinetic
+			// transform translateY(100vh) translateZ(0)
 	&.menu-visible
 		#container
 			+above($md + 1)
-				transform "translateY(100vh) translateX(calc(-50% + %s)) translateZ(0)" % $padding
+				// transform "translateY(100vh) translateX(calc(-50% + %s)) translateZ(0)" % $padding
 			// +below($md)
 			// 	transform translateY(100vh) translateZ(0) translateX(-100vw)

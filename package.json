@@ -33,7 +33,7 @@
     "jquery.2": "^1.0.0",
     "lazysizes": "^4.0.1",
     "rupture": "^0.7.1",
-    "smoothstate": "^0.7.2",
+    "smoothstate": "https://github.com/mcaskill/smoothState.js.git",
     "stylus": "^0.54.5",
     "viewport-units-buggyfill": "^0.6.2"
   }

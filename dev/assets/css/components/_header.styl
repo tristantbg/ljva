@@ -3,13 +3,12 @@ header
 	top 0
 	left 0
 	height 6.8rem
-	width 100%
+	width 100vw
 	white-space nowrap
 	z-index 2
 	background-color $main-bg-color
 	background-color var(--main-bg-color)
 	display inline-flex
-	width 100%
 	justify-content space-between
 	z-index 20
 	#current-page
@@ -19,22 +18,24 @@ header
 	[data-target=back]
 		transition opacity 0 linear
 		transition-delay 250ms
-		&:hover
-			h2
-				display none
-			&::after
-				content 'Retour'
-				color $main-title-color
-				color var(--main-title-color)
+		+above($md + 1)
+			&:hover
+				h2
+					display none
+				&::after
+					content 'Retour'
+					color $main-title-color
+					color var(--main-title-color)
 	#site-title
 		width 50%
 		padding $padding
 		text-align right
-		&:hover
-			h1
-				display none
-			&::after
-				content 'Menu'
+		+above($md + 1)
+			&:hover
+				h1
+					display none
+				&::after
+					content 'Menu'
 
 #main-menu
 	position fixed

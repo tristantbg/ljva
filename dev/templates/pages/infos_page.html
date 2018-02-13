@@ -4,7 +4,11 @@
   {% set isEvent = false %}
 {% endif %}
 
-<div class="featured-image">
+<div class="row in-panel">
+  <h1>{{entry.title}}</h1>
+</div>
+
+<div class="featured-image{% if entry.featuredImage.first is empty %} empty{% endif %}">
   {% for asset in entry.featuredImage %}
     <img class="lazy lazyload" data-src="{{ asset.getUrl('header') }}" width="100%" height="100%" />
     <noscript>
@@ -17,7 +21,7 @@
 
   <div class="header-content">
 
-    <div class="row py-half">
+    <div class="row py-half not-in-panel">
       <h1>{{entry.title}}</h1>
     </div>
     

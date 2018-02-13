@@ -3,9 +3,9 @@
   <!-- <div id="current-page"> -->
     {% if mainTitle is defined %}
         {% if mainTitle == "Programmation" %}
-          <h2>{{mainTitle}}</h2>
+          <h2 data-title="{{mainTitle}}"{% if scrollTitle is defined %} data-scroll="{{scrollTitle}}"{% endif %}>{{mainTitle}}</h2>
         {% else %}
-        <h2>{{mainTitle}}</h2>
+          <h2 data-title="{{mainTitle}}"{% if scrollTitle is defined %} data-scroll="{{scrollTitle}}"{% endif %}>{{mainTitle}}</h2>
         {% endif %}
     {% endif %}
   <!-- </div> -->
