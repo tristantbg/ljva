@@ -1,0 +1,19 @@
+{% extends "_layouts/default.html" %}
+
+{% set mainTitle = "Archives" %}
+{% set scrollTitle = mainTitle %}
+{% set pageTitle = mainTitle %}
+
+{% set page = "month" %}
+
+{% set events = craft.calendar.events %}
+
+{% set month = craft.calendar.month({
+    date: events.first.startDate
+}) %}
+
+{% block content %}
+    
+    {% include "programmation/partials/_infinite_month" %}
+
+{% endblock %}

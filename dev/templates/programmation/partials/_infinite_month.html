@@ -23,12 +23,12 @@
       {% endif %}
   </div>
   <div id="event-pagination" class="row">
-    <a class="previous-month title" href="{{ siteUrl }}programmation/month/{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{{ month.previousDate.format('Y/m') }}">
+    <a class="previous-month title" href="{{ siteUrl }}programmation/month/{% if segment2 is defined %}{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{% endif %}{{ month.previousDate.format('Y/m') }}">
         {% include "_components/arrow_left" %}
         <span>{{ month.previousDate.format('F')|capitalize }}</span>
     </a>
 
-    <a class="next-month title" href="{{ siteUrl }}programmation/month/{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{{ month.nextDate.format('Y/m') }}">
+    <a class="next-month title" href="{{ siteUrl }}programmation/month/{% if segment2 is defined %}{{ segment2 == "calendar" ? "calendar/"~segment3~"/" }}{% endif %}{{ month.nextDate.format('Y/m') }}">
         <span>{{ month.nextDate.format('F')|capitalize }}</span>
         {% include "_components/arrow_right" %}
     </a>
