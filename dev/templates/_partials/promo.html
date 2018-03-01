@@ -1,4 +1,37 @@
-{% if entry.promoText is defined and entry.promoText is not empty %}
+{% if entry.featuredEvent is defined and entry.featuredEvent is not empty %}
+
+{% for event in entry.featuredEvent.status(null) %}
+
+<div id="promo" class="fl c12 row mb2">
+  <div class="c4 fl" md="c12" style="min-height: 1px;">
+    {% for asset in event.featuredImage %}
+      <a href="{{event.url}}" data-target="event">
+        <img class="lazy lazyload" data-src="{{ asset.getUrl('header') }}" width="100%" />
+      </a>
+    {% endfor %}
+  </div>
+  <div class="co2 c6 fl" md="c12 co0 my2">
+    <div class="title">{{event.startDate.format('d.m')}}</div>
+    <div class="title">{{event.title}}</div>
+      <div class="row mt1">
+        <div class="c2 fl" md="c3 op0">
+            <h4 class="align-top">Artistes</h4>
+          </div>
+          <div class="c10 fl" md="c7">
+            <div class="event-artists lead event-infos--item">
+              {% for artist in event.artists %}
+                <div class="row title"><a href="{{artist.url}}" data-target="artiste">{{artist.title}}</a></div>
+              {% endfor %}
+            </div>
+          </div>
+      </div>
+      <div class="row mt2"><a class="title button" href="{{event.url}}" data-target="event">Tickets</a></div>
+  </div>
+</div>
+
+{% endfor %}
+
+{% elseif entry.promoText is defined and entry.promoText is not empty %}
 <div id="promo" class="fl c12 row mb2">
   <div class="c4 fl" md="c12" style="min-height: 1px;">
     {% for asset in entry.featuredImage %}

@@ -13,14 +13,16 @@ namespace "App", (exports) ->
 
   # Example function
   exports.interact = (pagePanel) ->
-    App.infiniteScrollEvents()
     App.scrollTitleChange()
+    if !$("body").hasClass("with-intro")
+      App.infiniteScrollEvents()
     $('body').click (e)->
       if $(this).hasClass("with-intro")
         $("body").addClass("animate")
         setTimeout ->
           $("body").removeClass 'with-intro animate'
           $("#intro").remove()
+          App.infiniteScrollEvents()
         , 700
     $('[event-target=java-card-close], .java-card-close').click (e)->
       $("#java-card").removeClass("visible")
@@ -107,12 +109,12 @@ namespace "App", (exports) ->
         duration: 400
         render: ($container, $newContent) ->
           # Inject the new content
-          $(window).scrollTop 0
           # $("body").attr 'page-type', $newContent.find('#container').attr 'page-type'
           if target == "artiste"
             $("#page-panel .inner").html $newContent.find("#page-content")
             App.interact(true)
           else
+            $(window).scrollTop 0
             $container.html $newContent
             App.interact()
           return
@@ -132,6 +134,7 @@ namespace "App", (exports) ->
 
   # Initialization scripts
   (exports.init = ->
+    $(window).scrollTop(0)
     window.viewportUnitsBuggyfill.init()
     $(document).ready () ->
       if $(window).width() > 1023
