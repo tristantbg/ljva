@@ -30,8 +30,12 @@
 
   </head>
 
-  <body class="with-intro" page-type="{{ craft.request.getSegment(1) ?: 'home' }}">
-    {% include "_partials/intro" %}
+    {% if craft.request.firstSegment == '' %}
+      <body class="with-intro" page-type="{{ craft.request.getSegment(1) ?: 'home' }}">
+      {% include "_partials/intro" %}
+    {% else %}
+      <body page-type="{{ craft.request.getSegment(1) ?: 'home' }}">
+    {% endif %}
 
     <div id="wrapper">
 

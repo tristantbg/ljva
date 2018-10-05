@@ -62,7 +62,7 @@ namespace "App", (exports) ->
       prefill: true
       responseType: 'document'
       outlayer: false
-      scrollThreshold: 200
+      scrollThreshold: 600
       # elementScroll: "#container"
       loadOnScroll: true
       history: undefined

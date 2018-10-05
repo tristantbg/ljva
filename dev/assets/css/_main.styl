@@ -7,6 +7,7 @@ global-reset()
 	--main-title-color $main-title-color
 	--main-text-color $main-text-color
 	--main-panel-color $main-panel-color
+	--main-panel-text $main-panel-text
 
 *
 	//hideselect()
@@ -52,8 +53,8 @@ h1, h2, h3, .title, .section-title, .menu-item, #site-title::after, [data-target
 	letter-spacing -.03em
 
 h2
-	color $main-title-color
-	color var(--main-title-color)
+	color $main-panel-color
+	color var(--main-panel-color)
 
 h4
 	text-transform uppercase
@@ -185,8 +186,8 @@ a, a:hover, a:visited, a:focus
 		// 	fill $main-bg-color
 		// 	fill var(--main-bg-color)
 	a:hover
-		color $main-bg-color
-		color var(--main-bg-color)
+		color $main-panel-color
+		color var(--main-panel-color)
 
 #page-content
 	span(1)
