@@ -7,9 +7,9 @@
     <div class="featured-image">
     </div>
     <div class="content">
-    		<ul id="artists" class="row">
-      {% for artist in craft.entries.section('artistes').order("title").find() %}
-    			<li class="title">
+        <ul id="artists" class="row">
+      {% for artist in craft.entries().section('artistes').order("title").limit(null).all() %}
+          <li class="title">
             <a href="{{ artist.url }}" 
             {% if artist.featuredImage and artist.featuredImage is not empty %}
             data-image="{{ artist.featuredImage.first.getUrl('header') }}"
@@ -17,7 +17,7 @@
             data-target="artiste">{{ artist.title }}</a>
           </li>
       {% endfor %}
-    		</ul>
+        </ul>
     </div>
   </div>
 {% endblock %}

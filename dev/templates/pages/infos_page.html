@@ -182,6 +182,8 @@
             <a href="{{ticket.yurplanUrl}}" target="_blank" rel="nofollow noopener"><h3>Yurplan</h3></a>
           {% elseif ticket.type == "digitick" %}
             <a href="{{ticket.digitickUrl}}" target="_blank" rel="nofollow noopener"><h3>Digitick</h3></a>
+          {% elseif ticket.type == "billetweb" %}
+            <a href="{{ticket.billetwebUrl}}" target="_blank" rel="nofollow noopener"><h3>Billetweb</h3></a>
           {% endif %}
         {% endfor %}
       </div>
