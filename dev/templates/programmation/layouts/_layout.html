@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-color="{{siteColors.textColor}}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,10 @@
         /* Helpful for testing and debugging. Comment this line out to make more data visible in template. */
         .solspace-debug {
             display: none;
+        }
+
+        :root {
+          --main-title-color: {{siteColors.mainColor}};
         }
     </style>
 </head>

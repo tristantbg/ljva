@@ -11,7 +11,8 @@
 	transform 'translateX(calc(-100% + 9rem + %s)) translateZ(0)' % ($padding*2)
 	background-color $main-bg-color
 	background-color var(--main-bg-color)
-	color #000
+	color $main-panel-color
+	color var(--main-panel-color)
 	z-index 11
 	+below($md)
 		display none
@@ -31,4 +32,6 @@
 				width 100%
 				fill $main-panel-color
 				fill var(--main-panel-color)
-				fill #000
+				path
+					fill $main-panel-color
+					fill var(--main-panel-color)

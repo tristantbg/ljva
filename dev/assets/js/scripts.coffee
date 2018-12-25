@@ -16,6 +16,10 @@ namespace "App", (exports) ->
     App.scrollTitleChange()
     if !$("body").hasClass("with-intro")
       App.infiniteScrollEvents()
+    else
+      window.scroll(0, 0)
+      if (history)
+        history.scrollRestoration = "manual"
     $('body').click (e)->
       if $(this).hasClass("with-intro")
         $("body").addClass("animate")

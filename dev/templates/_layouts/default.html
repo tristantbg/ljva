@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="fr">
+<html class="no-js" lang="fr" data-color="{{siteColors.textColor}}">
 
   <head>
 
@@ -27,6 +27,12 @@
         //]]></script>
       {% endspaceless %}
     {% endif %}
+
+    <style>
+        :root {
+          --main-title-color: {{siteColors.mainColor}};
+        }
+    </style>
 
   </head>
 

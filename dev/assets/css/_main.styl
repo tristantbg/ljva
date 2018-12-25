@@ -6,8 +6,13 @@ global-reset()
 	--main-bg-color $main-bg-color
 	--main-title-color $main-title-color
 	--main-text-color $main-text-color
+	--main-text-hover-color $main-panel-color
 	--main-panel-color $main-panel-color
 	--main-panel-text $main-panel-text
+
+[data-color=dark]
+	--main-text-color $main-panel-color
+	--main-text-hover-color $main-text-color
 
 *
 	//hideselect()
@@ -187,7 +192,7 @@ a, a:hover, a:visited, a:focus
 		// 	fill var(--main-bg-color)
 	a:hover
 		color $main-panel-color
-		color var(--main-panel-color)
+		color var(--main-text-hover-color)
 
 #page-content
 	span(1)
