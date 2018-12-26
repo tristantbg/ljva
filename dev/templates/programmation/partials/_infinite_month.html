@@ -14,7 +14,9 @@
         </div>
         <div id="events-items" class="c12 fl pt2">
           {% for event in month.events %}
+            {% if page != "home" or page == "home" and event.startDate >= date("now") %}
               {% include "programmation/layouts/_event.html" %}
+            {% endif %}
           {% else %}
               <!-- <h3 class="lead">Programmation bientôt disponible</h3> -->
           {% endfor %}

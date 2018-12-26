@@ -204,8 +204,11 @@
         <div class="c10 fl" md="c12">
           {% for event in allEvents %}
               {% if event.artists.id(entry.id).find() is not empty %}
-              <div class="row">
-              <a href="{{siteUrl}}/programmation/event/{{event.id}}" target="_self"><h3>{{event.title}}</h3></a>
+              <div class="row mb1">
+              <a href="{{siteUrl}}programmation/event/{{event.id}}" target="_self">
+                <h4>{{event.startDate.format('j F Y')}}</h4>
+                <h3>{{event.title}}</h3>
+              </a>
               </div>
               {% endif %}
           {% endfor %}
