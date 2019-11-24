@@ -24,14 +24,14 @@
     <div class="row py-half not-in-panel">
       <h1>{{entry.title}}</h1>
     </div>
-    
+
     {% if isEvent %}
     <div class="row">
       <div class="c2 fl" md="c3">
         <div class="event-calendar">
           <a href="{{ siteUrl }}programmation/month/calendar/{{ entry.calendar.handle }}">
             <span class="button lead">{{entry.calendar.name}}</span>
-          </a>  
+          </a>
         </div>
       </div>
       <div class="c5 fl">
@@ -148,7 +148,7 @@
 <!-- section#.row>div.c2.fl.lead+div.c10.fl -->
 
   <div class="page-content">
-    
+
     {% if entry.body is defined and entry.body is not empty %}
     <section id="infos" class="row">
       <div class="c2 fl" md="c12 mb1">
@@ -184,6 +184,8 @@
             <a href="{{ticket.digitickUrl}}" target="_blank" rel="nofollow noopener"><h3>Digitick</h3></a>
           {% elseif ticket.type == "billetweb" %}
             <a href="{{ticket.billetwebUrl}}" target="_blank" rel="nofollow noopener"><h3>Billetweb</h3></a>
+          {% elseif ticket.type == "dice" %}
+            <a href="{{ticket.diceUrl}}" target="_blank" rel="nofollow noopener"><h3>DICE</h3></a>
           {% endif %}
         {% endfor %}
       </div>
