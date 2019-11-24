@@ -14,7 +14,7 @@
         </div>
         <div id="events-items" class="c12 fl pt2">
           {% for event in month.events %}
-            {% if page != "home" or page == "home" and event.startDate >= date("now") %}
+            {% if page != "home" or page == "home" and event.startDate >= date("yesterday") %}
               {% include "programmation/layouts/_event.html" %}
             {% endif %}
           {% else %}
